@@ -29,7 +29,33 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jqueryui/jquery-ui.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/raphael/raphael.min.js",
+              "node_modules/morris.js/morris.min.js",
+              "node_modules/jquery-sparkline/jquery.sparkline.min.js",
+              "node_modules/jquery-knob/dist/jquery.knob.min.js",
+              "node_modules/moment/moment.js",
+              "node_modules/bootstrap-datepicker/js/bootstrap-datepicker.js",
+              "node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
+              "node_modules/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.min.js",
+              "node_modules/icheck/icheck.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.min.js",
+              "node_modules/datatables.net-bs/js/dataTables.bootstrap.min.js",
+
+              "node_modules/jszip/dist/jszip.min.js",
+              "node_modules/datatables.net-buttons/js/dataTables.buttons.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.colVis.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.flash.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.html5.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.print.min.js",
+
+              "node_modules/admin-lte/dist/js/adminlte.min.js",
+              "src/assets/js/adminLTEOptions.js",
+              "src/assets/js/scripts.js"
+            ]
           },
           "configurations": {
             "production": {
