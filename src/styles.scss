@@ -6,3 +6,7 @@
 @import url(~admin-lte/dist/css/AdminLTE.min.css);
 @import url(~admin-lte/dist/css/skins/_all-skins.min.css);
 // @import "assets/plugins/iCheck/square/blue.css";
+
+.navbar {
+    padding: 0 !important;
+}

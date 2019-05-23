@@ -3,14 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { DashboardComponent } from './pages/admin-page/dashboard/dashboard.component';
 
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginPageComponent
-  },
-
   {
     path: '',
     redirectTo: 'login',
@@ -18,14 +14,31 @@ const routes: Routes = [
   },
 
   {
+    path: 'login',
+    component: LoginPageComponent
+  },
+
+  {
     path: 'admin',
     component: AdminPageComponent,
-    // children: [
-    //   {
-    //     path: '',
-    //     redirectTo: 'admin-home',
-    //     pathMatch: 'full'
-    //   },
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      }
+    ]
+  },
+
+  {
+    path: 'admin',
+    redirectTo: 'admin/dashboard',
+    pathMatch: 'full'
+  },
+   
+  {
+    path: '**',
+    redirectTo: ''
+  }
     //   {
     //     path: 'admin-home',
     //     component: AdminHomeComponent
@@ -35,12 +48,6 @@ const routes: Routes = [
     //     component: AdminProgramsComponent
     //   }
     // ]
-  },
-  
-  {
-    path: '**',
-    redirectTo: ''
-  }
 ];
 
 @NgModule({

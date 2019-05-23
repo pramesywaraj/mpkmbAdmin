@@ -7,19 +7,19 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AdminPageComponent implements OnInit, OnDestroy {
 
-  bodyClasses = 'skin-blue sidebar-mini';
+  bodyClasses = 'skin-green-light sidebar-mini';
   body: HTMLBodyElement = document.getElementsByTagName('body')[0];
 
   constructor() { }
 
   ngOnInit() {
-    this.body.classList.add('skin-blue');
+    this.body.classList.add('skin-green-light');
     this.body.classList.add('sidebar-mini');
   }
 
   ngOnDestroy() {
     // remove the the body classes
-    this.body.classList.remove('skin-blue');
+    this.body.classList.remove('skin-green-light');
     this.body.classList.remove('sidebar-mini');
   }
 }

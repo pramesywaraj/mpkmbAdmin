@@ -8,6 +8,7 @@ import { AppfooterComponent } from './components/appfooter/appfooter.component';
 import { AppsidemenuComponent } from './components/appsidemenu/appsidemenu.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { DashboardComponent } from './pages/admin-page/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     AppsidemenuComponent,
     LoginPageComponent,
     AdminPageComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
