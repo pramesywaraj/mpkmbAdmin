@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { DashboardComponent } from './pages/admin-page/dashboard/dashboard.component';
+import { RouteGuardGuard } from './guards/route-guard.guard';
+import { NewsComponent } from './pages/admin-page/news/news.component';
+import { TaskComponent } from './pages/admin-page/task/task.component';
 
 
 const routes: Routes = [
@@ -21,10 +24,19 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminPageComponent,
+    canActivate: [RouteGuardGuard],
     children: [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'news',
+        component: NewsComponent
+      },
+      {
+        path: 'task',
+        component: TaskComponent
       }
     ]
   },
@@ -37,7 +49,7 @@ const routes: Routes = [
    
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'admin/dashboard'
   }
     //   {
     //     path: 'admin-home',

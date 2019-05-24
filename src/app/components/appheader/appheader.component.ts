@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Alert } from 'selenium-webdriver';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appheader',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppheaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService, public router: Router) { }
 
   ngOnInit() {
+  }
+
+  private logout() {
+    this.auth.logout();
+    alert('Anda berhasil keluar.');
+    this.router.navigate['/login'];
   }
 
 }

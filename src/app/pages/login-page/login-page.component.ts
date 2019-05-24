@@ -1,4 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth.service';
+
 
 @Component({
   selector: 'app-login-page',
@@ -11,8 +15,21 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   body: HTMLBodyElement = document.getElementsByTagName('body')[0];
   checkbox_icheck: HTMLElement = document.getElementById('checkbox_icheck');
 
+  // @Input() user = {
+  //   email: '',
+  //   password: ''
+  // }
 
-  constructor() { }
+  private LoginUser: FormGroup;
+
+  constructor(public router: Router, public auth: AuthService, private formBuilder: FormBuilder) {
+    this.LoginUser = this.formBuilder.group(
+      {
+        email: ["", Validators.required],
+        password: ["", Validators.required]
+      }
+    );
+  }
 
   ngOnInit() {
     this.body.classList.add('hold-transition');
@@ -25,5 +42,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.body.classList.remove('login-page');
   }
 
-
+  loggingIn() {
+    this.auth.login(this.LoginUser.value).subscribe((data) => {
+      this.router.navigate(['/admin/dashboard']);
+      alert('Anda berhasil Login.');
+    },
+    err => {
+      console.log('err', err);
+      alert('Terjadi Error ' + err);
+    })
+  }
 }
