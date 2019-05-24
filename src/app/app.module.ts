@@ -17,6 +17,8 @@ import { ConfigService } from './services/config.service';
 import { AuthService } from './services/auth.service';
 import { NewsComponent } from './pages/admin-page/news/news.component';
 import { TaskComponent } from './pages/admin-page/task/task.component';
+import { GalleryComponent } from './pages/admin-page/gallery/gallery.component';
+import { StoreComponent } from './pages/admin-page/store/store.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { TaskComponent } from './pages/admin-page/task/task.component';
     DashboardComponent,
     NewsComponent,
     TaskComponent,
+    GalleryComponent,
+    StoreComponent,
   ],
   imports: [
     BrowserModule,
