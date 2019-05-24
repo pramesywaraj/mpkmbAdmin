@@ -14,7 +14,6 @@ export class RouteGuardGuard implements CanActivate  {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentToken = window.localStorage.getItem('token');
-    console.log('ada ga', currentToken);
     if (currentToken != null) {
         // authorised so return true
         return true;

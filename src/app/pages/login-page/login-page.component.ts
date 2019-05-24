@@ -44,12 +44,17 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   loggingIn() {
     this.auth.login(this.LoginUser.value).subscribe((data) => {
-      this.router.navigate(['/admin/dashboard']);
-      alert('Anda berhasil Login.');
+      if(data.status == 200) {
+        this.router.navigate(['/admin/dashboard']);
+        alert('Anda berhasil Login.');
+      } else if(data.status == 401) {
+        alert('Password Anda atau email salah.');
+      }
     },
     err => {
       console.log('err', err);
-      alert('Terjadi Error ' + err);
+      if (err.status == 401)
+          alert("Email dan Password salah!");
     })
   }
 }

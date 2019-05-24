@@ -25,13 +25,15 @@ export class AuthService {
     return this.http.post<any>(
       this.config.baseUrl + 'auth/login', JSON.stringify(user), this.httpOptions)
       .pipe(
-        map(user => {
-          if(user.status == 200) {
-            this.storeToken(user.token);
+        map(resp => {
+          if(resp.status == 200) {
+            this.storeToken(resp.token);
+            return resp;
           }
-          return user;
+          
+          return resp;
         })
-      )
+      );
   }
 
   public logout() {
