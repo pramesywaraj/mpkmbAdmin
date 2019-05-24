@@ -7,6 +7,8 @@ import { DashboardComponent } from './pages/admin-page/dashboard/dashboard.compo
 import { RouteGuardGuard } from './guards/route-guard.guard';
 import { NewsComponent } from './pages/admin-page/news/news.component';
 import { TaskComponent } from './pages/admin-page/task/task.component';
+import { GalleryComponent } from './pages/admin-page/gallery/gallery.component';
+import { StoreComponent } from './pages/admin-page/store/store.component';
 
 
 const routes: Routes = [
@@ -31,13 +33,21 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'news',
+        path: 'berita',
         component: NewsComponent
       },
       {
-        path: 'task',
+        path: 'penugasan',
         component: TaskComponent
-      }
+      },
+      {
+        path: 'galeri',
+        component: GalleryComponent
+      },
+      {
+        path: 'toko',
+        component: StoreComponent
+      },
     ]
   },
 
@@ -51,15 +61,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'admin/dashboard'
   }
-    //   {
-    //     path: 'admin-home',
-    //     component: AdminHomeComponent
-    //   },
-    //   {
-    //     path: 'admin-programs',
-    //     component: AdminProgramsComponent
-    //   }
-    // ]
+
 ];
 
 @NgModule({
