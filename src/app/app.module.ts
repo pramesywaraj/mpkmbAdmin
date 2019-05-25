@@ -19,6 +19,7 @@ import { NewsComponent } from './pages/admin-page/news/news.component';
 import { TaskComponent } from './pages/admin-page/task/task.component';
 import { GalleryComponent } from './pages/admin-page/gallery/gallery.component';
 import { StoreComponent } from './pages/admin-page/store/store.component';
+import { AddnewsComponent } from './pages/admin-page/news/addnews/addnews.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { StoreComponent } from './pages/admin-page/store/store.component';
     TaskComponent,
     GalleryComponent,
     StoreComponent,
+    AddnewsComponent,
   ],
   imports: [
     BrowserModule,

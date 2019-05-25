@@ -36,6 +36,16 @@ export class AuthService {
       );
   }
 
+  public checkTime(): Observable<any> {
+    return this.http.get<any>(
+      this.config.baseUrl + 'timeline/nearest')
+      .pipe(
+        map(resp => {
+          return resp;
+        })
+      );
+  }
+
   public logout() {
     this.userToken = null;
     localStorage.removeItem("token");
@@ -46,9 +56,10 @@ export class AuthService {
     this.userToken = token;
   }
 
-  // public loadToken() {
-  //   let token = JSON.parse(window)
-  // }
+  public loadToken() {
+    let token = JSON.parse(window.localStorage.getItem('token'));
+    return token;
+  }
 
   // Error handling 
   handleError(error) {

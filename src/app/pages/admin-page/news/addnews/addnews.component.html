@@ -1,0 +1,72 @@
+<section class="content-header">
+  <h1>
+    Tambah Berita Baru
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+      <a href="#">
+        <i class="fa fa-dashboard"></i> Home</a>
+    </li>
+    <li class="active">Berita</li>
+    <li class="active">Tambah Berita</li>
+  </ol>
+</section>
+
+
+<section class="content">
+
+  <div class="box box-default">
+    <form #formBerita="ngForm" (ngSubmit)="addBerita(formBerita)" class="form">
+      <div class="box-header with-border">
+        <h5>Data Utama</h5>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+      </div>
+    <!-- /.box-header -->
+      <div class="box-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="judulBerita">Judul Berita</label>
+                <input type="text" class="form-control" id="judulBerita" placeholder="Masukkan isi berita" name="title" ngModel required>
+              </div>
+              <div class="form-group">
+                <label for="ringkasanBerita">Ringkasan Berita</label>
+                <input type="text" class="form-control" id="ringkasanBerita" placeholder="Masukkan ringkasan berita" name="summary" ngModel required>
+              </div>
+              <div class="form-group">
+                <label for="ringkasanBerita">Caption Berita</label>
+                <input type="text" class="form-control" id="captionBerita" placeholder="Masukkan caption berita" name="snippet" ngModel required>
+              </div>
+              <div class="form-group">
+                <label>Isi Berita</label>
+                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body" ngModel required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Gambar Utama</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="file" (change)="detectFiles($event)" name="coverImages" ngModel required>
+                  <label class="custom-file-label" for="file">{{fileInput}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="image-preview">
+                <img [src]="primaryImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-500x382.jpg'" alt="your image" />
+              </div>
+            </div>
+            
+          </div>     
+        <!-- /.row -->
+      </div>
+    <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="submit" class="btn btn-success pull-right">Tambahkan</button>
+      </div>
+    </form>
+
+  </div>
+
+</section>

@@ -9,6 +9,7 @@ import { NewsComponent } from './pages/admin-page/news/news.component';
 import { TaskComponent } from './pages/admin-page/task/task.component';
 import { GalleryComponent } from './pages/admin-page/gallery/gallery.component';
 import { StoreComponent } from './pages/admin-page/store/store.component';
+import { AddnewsComponent } from './pages/admin-page/news/addnews/addnews.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,11 @@ const routes: Routes = [
       },
       {
         path: 'berita',
-        component: NewsComponent
+        component: NewsComponent,
+      },
+      {
+        path: 'tambah-berita',
+        component: AddnewsComponent
       },
       {
         path: 'penugasan',
