@@ -3,6 +3,9 @@ import { AuthService } from '../../../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NewsService } from '../../../../services/news.service';
 
+declare var ImageCompressor: any;
+const compressor = new ImageCompressor();
+
 @Component({
   selector: 'app-addnews',
   templateUrl: './addnews.component.html',
@@ -14,6 +17,8 @@ export class AddnewsComponent implements OnInit {
   primaryImage: string;
 
   uploadData: FormGroup;
+
+  promises: Promise<Blob>[] = [];
 
   constructor(public auth: AuthService, public news: NewsService, public formBuilder: FormBuilder) { }
 
@@ -33,18 +38,30 @@ export class AddnewsComponent implements OnInit {
     console.log(event.target.files);
     if(event.target.files.length > 0) {
       let file = event.target.files[0];
-      this.changeInputLabelImage(file);
 
-      this.uploadData.get('coverImages').setValue(file);
+      // this.compressingImage(file);
+      this.promises.push(compressor.compress(file, {quality: .5}));
+    
+      let temp = Promise.all(this.promises)
+        .then(file => {
+          this.setImage(file);
+        }
+      );
+
+      // this.uploadData.get('coverImages').setValue(file);
     }   
   }
 
-  changeInputLabelImage (file) {
+  changeInputLabelImage (file: any[]) {
     const reader = new FileReader();
     reader.onload = e => this.primaryImage = reader.result as string;
+    this.fileInput = file[0].name;
+    reader.readAsDataURL(file[0]);    
+  }
 
-    this.fileInput = file.name;
-    reader.readAsDataURL(file);
+  setImage(file: any[]) {
+    this.uploadData.get('coverImages').setValue(file[0]);
+    this.changeInputLabelImage(file);
   }
 
   addBerita(form) {
@@ -57,6 +74,8 @@ export class AddnewsComponent implements OnInit {
     formData.append('body', temp.body);
     formData.append('snippet', temp.snippet);
     formData.append('coverImages', this.uploadData.get('coverImages').value);
+
+    console.log(this.uploadData.get('coverImages').value);
   
 
     this.news.addNews(formData).subscribe((data) => {

@@ -32,6 +32,10 @@ export class NewsService {
             return resp;
           }
         ),
+        catchError(err => {
+          console.log('Handling error locally and rethrowing it...', err);
+          return throwError(err);
+        })
       );
   }
   

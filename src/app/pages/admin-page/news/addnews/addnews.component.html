@@ -47,15 +47,24 @@
               <div class="form-group">
                 <label>Gambar Utama</label>
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="file" (change)="detectFiles($event)" name="coverImages" ngModel required>
+                  <input type="file" class="custom-file-input" id="file" 
+                    (change)="detectFiles($event)" 
+                    name="coverImages" 
+                    accept="image/jpg, image/jpeg" 
+                    ngModel required
+                  >
                   <label class="custom-file-label" for="file">{{fileInput}}</label>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="image-preview">
-                <img [src]="primaryImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-500x382.jpg'" alt="your image" />
+                <img 
+                  [src]="primaryImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-500x382.jpg'" 
+                  alt="your image"
+                />
               </div>
+              <span>Gambar harus memiliki ekstensi jpeg atau jpg.</span>
             </div>
             
           </div>     
