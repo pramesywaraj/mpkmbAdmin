@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NewsService } from '../../../../services/news.service';
+import { Router } from '@angular/router';
 
 declare var ImageCompressor: any;
 const compressor = new ImageCompressor();
@@ -20,7 +21,7 @@ export class AddnewsComponent implements OnInit {
 
   promises: Promise<Blob>[] = [];
 
-  constructor(public auth: AuthService, public news: NewsService, public formBuilder: FormBuilder) { }
+  constructor(public auth: AuthService, public news: NewsService, public formBuilder: FormBuilder, public router: Router) { }
 
   ngOnInit() {
     // init the news form
@@ -75,12 +76,17 @@ export class AddnewsComponent implements OnInit {
     formData.append('snippet', temp.snippet);
     formData.append('coverImages', this.uploadData.get('coverImages').value);
 
-    console.log(this.uploadData.get('coverImages').value);
+    // console.log('cek',);
   
-
-    this.news.addNews(formData).subscribe((data) => {
-      console.log('data', data);
-    });
+    this.news.addNews(formData).subscribe(
+      data => {
+        alert('Berita berhasil ditambahkan');
+        this.router.navigate(['admin/berita']);
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
     
   }
 

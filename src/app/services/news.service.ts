@@ -19,7 +19,7 @@ export class NewsService {
 
   public addNews(news): Observable<any> {
     let header = new HttpHeaders();
-    header = header.append('Content-type', 'application/json');
+    // header = header.append('Content-type', 'multipart/form-data');
     header = header.append('Authorization', 'Bearer ' + this.userToken);
 
     console.log('beritea', news);
@@ -33,10 +33,42 @@ export class NewsService {
           }
         ),
         catchError(err => {
-          console.log('Handling error locally and rethrowing it...', err);
+          console.log('This error inside the news service and addNews function...', err);
           return throwError(err);
         })
       );
+  }
+
+  public getNews(): Observable<any> {
+    return this.http.get<any>(
+      this.config.baseUrl + 'news/gets?page=1&limit=50&sort=-1'
+    ).pipe(
+      map(
+        resp => {
+          return resp;
+        }
+      ),
+      catchError(err => {
+        console.log('This error inside the news service and getNews function...', err);
+        return throwError(err);
+      })
+    ); 
+  }
+
+  public getNewsDetail(id): Observable<any> {
+    return this.http.get<any>(
+      this.config.baseUrl + 'news/get/' + id
+    ).pipe(
+      map(
+        resp => {
+          return resp;
+        }
+      ),
+      catchError(err => {
+        console.log('This error inside the news service and getNewsDetail function...', err);
+        return throwError(err);
+      })
+    ); 
   }
   
 }
