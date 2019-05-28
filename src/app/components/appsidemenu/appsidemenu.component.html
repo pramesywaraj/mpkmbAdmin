@@ -14,17 +14,17 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">PILIHAN MENU ANDA</li>
-      <li class="treeview menu-open">
-        <a routerLink="/admin/dashboard" routerLinkActive="active">
+      <li routerLink="/admin/dashboard" routerLinkActive="active">
+        <a>
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
-      <li>
-        <a routerLink="/admin/berita" routerLinkActive="active">
+      <li routerLink="/admin/berita" routerLinkActive="active">
+        <a>
           <i class="fa fa-th"></i> <span>Berita</span>
         </a>
       </li>
-      <li class="treeview">
+      <li class="treeview" routerLinkActive="active">
         <a>
           <i class="fa fa-tasks"></i>
           <span>Penugasan</span>
@@ -33,7 +33,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a routerLink="/admin/penugasan" routerLinkActive="active"><i class="fa fa-plus"></i>Tambah Kelompok</a></li>
+          <li routerLink="/admin/penugasan" routerLinkActive="active"><a><i class="fa fa-plus"></i>Tambah Kelompok</a></li>
           <li class="treeview">
             <a href="#"><i class="fa fa-users"></i> Daftar Kelompok
               <span class="pull-right-container">
@@ -48,14 +48,14 @@
         </ul>
       </li>
 
-      <li>
-        <a routerLink="/admin/galeri" routerLinkActive="active">
+      <li routerLink="/admin/galeri" routerLinkActive="active">
+        <a>
           <i class="fa fa-picture-o"></i> <span>Galeri</span>
         </a>
       </li>
 
-      <li>
-        <a routerLink="/admin/toko" routerLinkActive="active">
+      <li routerLink="/admin/toko" routerLinkActive="active">
+        <a>
           <i class="fa fa-shopping-cart"></i> <span>MPKMB Store</span>
         </a>
       </li>

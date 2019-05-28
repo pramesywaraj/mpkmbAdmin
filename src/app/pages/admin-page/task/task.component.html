@@ -1,26 +1,65 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-      Penugasan
+      Tambah Kelompok
     </h1>
     <ol class="breadcrumb">
       <li>
         <a href="#">
           <i class="fa fa-dashboard"></i> Home</a>
       </li>
-      <li class="active">Task</li>
+      <li class="active">Tambah Kelompok</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
 
-      <div class="box">
-        <div class="box-header">
-          
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="box">
+          <div class="box-header">
+            <h5>Kelompok Yang Ada</h5>
+          </div>
+
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nama Kelompok</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let news of newsList; let i = index">
+                  <td [routerLink]="['/admin/berita-detail', news._id]">{{news.title}}</td>
+                  <td>
+                    <a class="btn btn-danger" (click)="deleteNews(news._id)">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr *ngIf="!newsList">
+                  <td>Tidak ada kelompok yang dapat ditampilkan saat ini.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+         
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="box">
+          <div class="box-header">
+            <h5>Tambahkan Kelompok Baru</h5>
+          </div>
         </div>
           
       </div>
+    </div>
 
   </section>
   <!-- /.content -->

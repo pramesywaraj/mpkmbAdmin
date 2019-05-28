@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { Observable, throwError } from 'rxjs';
 
-import { retry, catchError, map } from 'rxjs/operators';
+import { retry, catchError, map, delay } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -55,6 +55,24 @@ export class NewsService {
     ); 
   }
 
+  public deleteNews(id): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+    return this.http.delete<any>(
+      this.config.baseUrl + 'news/delete/' + id, {headers: header}
+    ).pipe(
+      map(
+        resp => {
+          return resp;
+        }
+      ),
+      catchError(err => {
+        console.log('This error inside the news service and deleteNews function...', err);
+        return throwError(err);
+      })
+    );
+  }
+
   public getNewsDetail(id): Observable<any> {
     return this.http.get<any>(
       this.config.baseUrl + 'news/get/' + id
@@ -70,5 +88,6 @@ export class NewsService {
       })
     ); 
   }
+
   
 }

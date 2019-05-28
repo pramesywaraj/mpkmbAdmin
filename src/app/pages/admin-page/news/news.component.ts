@@ -1,33 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NewsService } from '../../../services/news.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
 
   newsList: any;
+  private subscription: Subscription;
 
   constructor(private news: NewsService, public router: Router) {
-    this.getNews();
   }
 
   ngOnInit() {
+    this.getNews();
+  }
+
+  ngOnDestroy() {
+    this.clearNews();
   }
 
   private getNews() {
-    this.news.getNews().subscribe(data => {
-      this.newsList = data.news.docs;
-      console.log(this.newsList);
-    });
+    this.subscription = this.news.getNews().subscribe(
+      data => {
+        this.newsList = data.news.docs;
+        console.log(this.newsList);
+      }
+    );
   }
 
-  private goToNewsDetail(id) {
-    console.log('cobaan', id);
-    this.router.navigate(['admin/aweu', id]);
+  private clearNews() {
+    this.subscription.unsubscribe();
+  }
+
+  private deleteNews(id) {
+
+    if(confirm('Apakah Anda yakin akan menghapus berita ini?')) {
+      this.news.deleteNews(id).subscribe(data => {
+        alert('Berita berhasil dihapus.');
+        this.router.navigate(['admin/berita']);
+      });
+    }
   }
 
 }
