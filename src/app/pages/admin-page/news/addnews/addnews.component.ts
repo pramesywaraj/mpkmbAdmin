@@ -97,13 +97,13 @@ export class AddnewsComponent implements OnInit {
   changeInputLabelOtherImage (file: any[]) {
     const reader = new FileReader();
     reader.onload = e => this.bodyImageLabel = reader.result as string;
-    this.fileInput = file[0].name;
+    // this.fileInput = file[0].name;
     reader.readAsDataURL(file[0]);    
   }
 
   setCoverImage(file) {
     this.coverImage.get('coverImages').setValue(file);
-    this.changeInputLabelCoverImage(file);
+    // this.changeInputLabelCoverImage(file);
   }
 
   setBodyImage(file) {

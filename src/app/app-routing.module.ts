@@ -16,7 +16,7 @@ import { NewsdetailComponent } from './pages/admin-page/news/newsdetail/newsdeta
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
 

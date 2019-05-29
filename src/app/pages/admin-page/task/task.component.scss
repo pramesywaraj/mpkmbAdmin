@@ -18,3 +18,12 @@ table {
         color: white;
     }
 }
+
+.modal {
+    .modal-header {
+        padding: 0 !important;
+        .close {
+            margin: 0 !important;
+        }
+    }
+}
