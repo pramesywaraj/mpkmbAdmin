@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class NewsComponent implements OnInit, OnDestroy {
 
-  newsList: any;
+  newsList = [];
   private subscription: Subscription;
 
   constructor(private news: NewsService, public router: Router) {

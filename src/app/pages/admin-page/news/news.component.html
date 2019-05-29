@@ -37,19 +37,19 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="newsList.length == 0" class="news-none">
+          Tidak ada berita yang ditampilkan saat ini.
+        </tbody>
+        <tbody *ngIf="newsList.length > 0">
           <tr *ngFor="let news of newsList; let i = index">
             <td>{{i+1}}</td>
-            <td [routerLink]="['/admin/berita-detail', news._id]">{{news.title}}</td>
+            <td [routerLink]="['/admin/berita/berita-detail', news._id]">{{news.title}}</td>
             <td>{{news.summary}}</td>
             <td>
               <a class="btn btn-danger" (click)="deleteNews(news._id)">
                 <i class="fa fa-trash"></i>
               </a>
             </td>
-          </tr>
-          <tr *ngIf="!newsList">
-            <td>Tidak ada berita yang ditampilkan saat ini.</td>
           </tr>
         </tbody>
       </table>

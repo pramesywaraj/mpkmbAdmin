@@ -11,6 +11,7 @@ import { GalleryComponent } from './pages/admin-page/gallery/gallery.component';
 import { StoreComponent } from './pages/admin-page/store/store.component';
 import { AddnewsComponent } from './pages/admin-page/news/addnews/addnews.component';
 import { NewsdetailComponent } from './pages/admin-page/news/newsdetail/newsdetail.component';
+import { GroupTaskComponent } from './pages/admin-page/task/group-task/group-task.component';
 
 
 const routes: Routes = [
@@ -37,10 +38,12 @@ const routes: Routes = [
       {
         path: 'berita',
         component: NewsComponent,
-      },
-      {
-        path: 'berita-detail/:id',
-        component: NewsdetailComponent,
+        children: [
+          {
+            path: 'berita-detail/:id',
+            component: NewsdetailComponent,
+          }
+        ]
       },
       {
         path: 'tambah-berita',
@@ -48,7 +51,13 @@ const routes: Routes = [
       },
       {
         path: 'penugasan',
-        component: TaskComponent
+        component: TaskComponent,
+        children: [
+          {
+            path: 'kelompok-detail/:id',
+            component: GroupTaskComponent,
+          }
+        ]
       },
       {
         path: 'galeri',

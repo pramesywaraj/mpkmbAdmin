@@ -12,7 +12,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  categories: any;
+  categories = [];
   nameInput = {
     name: ''
   };
@@ -37,6 +37,9 @@ export class TaskComponent implements OnInit, OnDestroy {
     if(this.nameInput.name) {
       this.task.addCategory(this.nameInput).subscribe(data => {
         alert('Kategori berhasil ditambahkan!');
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+          this.router.navigate(["admin/penugasan"])
+        ); 
       },
       err => console.log(err)
       );

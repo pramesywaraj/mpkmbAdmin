@@ -21,6 +21,7 @@ import { GalleryComponent } from './pages/admin-page/gallery/gallery.component';
 import { StoreComponent } from './pages/admin-page/store/store.component';
 import { AddnewsComponent } from './pages/admin-page/news/addnews/addnews.component';
 import { NewsdetailComponent } from './pages/admin-page/news/newsdetail/newsdetail.component';
+import { GroupTaskComponent } from './pages/admin-page/task/group-task/group-task.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { NewsdetailComponent } from './pages/admin-page/news/newsdetail/newsdeta
     StoreComponent,
     AddnewsComponent,
     NewsdetailComponent,
+    GroupTaskComponent,
   ],
   imports: [
     BrowserModule,

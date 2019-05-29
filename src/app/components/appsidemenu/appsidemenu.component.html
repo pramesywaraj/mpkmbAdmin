@@ -34,15 +34,17 @@
         </a>
         <ul class="treeview-menu">
           <li routerLink="/admin/penugasan" routerLinkActive="active"><a><i class="fa fa-plus"></i>Tambah Kelompok</a></li>
-          <li class="treeview">
+          <li class="treeview" (click)="refresh()">
             <a href="#"><i class="fa fa-users"></i> Daftar Kelompok
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li *ngFor="let category of categoryList"><a href="#">
-                <i class="fa fa-circle-o"></i> {{category.category.name}}</a>
+              <li *ngFor="let category of categoryList" (click)="goToGroupTask(category)">
+                <a>
+                  <i class="fa fa-circle-o"></i> {{category.category.name}}
+                </a>
               </li>
             </ul>
           </li>

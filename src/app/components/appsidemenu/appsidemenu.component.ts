@@ -10,7 +10,7 @@ import { TaskService } from './../../services/task.service';
 })
 export class AppsidemenuComponent implements OnInit {
 
-  categoryList : any;
+  categoryList = [];
 
   constructor(
     private router: Router,
@@ -18,6 +18,19 @@ export class AppsidemenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.task.getCategory().subscribe(data => {
+      if(data.status == 200) {
+        this.categoryList = data.categories;
+      }
+    });
+  }
+
+  goToGroupTask(category) {
+    console.log('category detail', category);
+    this.task.setCategoryData(category);
+  }
+
+  refresh() {
     this.task.getCategory().subscribe(data => {
       if(data.status == 200) {
         this.categoryList = data.categories;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 
 import { retry, catchError, map, delay } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -12,6 +12,9 @@ import { AuthService } from './auth.service';
 export class TaskService {
 
   userToken: any;
+
+  private categorySource = new BehaviorSubject(null);
+  currentCategory = this.categorySource.asObservable();
 
   constructor(private http: HttpClient, private config: ConfigService, public auth: AuthService) {
     this.userToken = this.auth.loadToken();
@@ -72,5 +75,10 @@ export class TaskService {
           return throwError(err);
         })
       );
+  }
+
+  public setCategoryData(category) {
+    this.categorySource.next(category);
+    console.log('naon', this.categorySource);
   }
 }
