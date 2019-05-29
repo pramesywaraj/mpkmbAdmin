@@ -33,7 +33,7 @@
                 <input type="text" class="form-control" id="judulBerita" placeholder="Masukkan isi berita" name="title" ngModel required>
               </div>
               <div class="form-group">
-                <label for="ringkasanBerita">Ringkasan Berita</label>
+                <label for="ringkasanBerita">Highlight Berita</label>
                 <input type="text" class="form-control" id="ringkasanBerita" placeholder="Masukkan ringkasan berita" name="summary" ngModel required>
               </div>
               <div class="form-group">
@@ -41,32 +41,72 @@
                 <input type="text" class="form-control" id="captionBerita" placeholder="Masukkan caption berita" name="snippet" ngModel required>
               </div>
               <div class="form-group">
-                <label>Isi Berita</label>
-                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body" ngModel required></textarea>
+                <label>Isi Berita 1</label>
+                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body1" ngModel required></textarea>
               </div>
               <div class="form-group">
-                <label>Gambar Utama</label>
+                <label>Isi Berita 2</label>
+                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body2" ngModel required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Isi Berita 3</label>
+                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body3" ngModel required></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Gambar Utama Berita</label>
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="file" 
-                    (change)="detectFiles($event)" 
+                    (change)="detectImage($event, 'cover')" 
                     name="coverImages" 
                     accept="image/jpg, image/jpeg" 
                     ngModel required
                   >
-                  <label class="custom-file-label" for="file">{{fileInput}}</label>
+                  <label class="custom-file-label" for="file">{{coverImageLabel}}</label>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6">
               <div class="image-preview">
+                <!-- <img 
+                  [src]="coverImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
+                  alt="your image"
+                /> -->
+              </div>
+
+              <div class="form-group">
+                <label>Gambar di Tubuh Berita</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="file" 
+                    (change)="detectImage($event, 'body')" 
+                    name="bodyImages" 
+                    accept="image/jpg, image/jpeg" 
+                    ngModel required
+                  >
+                  <label class="custom-file-label" for="file">{{bodyImageLabel}}</label>
+                </div>
+              </div>
+              <!-- <div class="image-preview">
                 <img 
-                  [src]="primaryImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-500x382.jpg'" 
+                  [src]="bodyImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
                   alt="your image"
                 />
+              </div> -->
+              
+              <div class="form-group">
+                <label>Gambar di Lainnya</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="file" 
+                    (change)="detectImages($event)" 
+                    name="otherImage" 
+                    accept="image/jpg, image/jpeg" 
+                    ngModel required
+                  >
+                  <label class="custom-file-label" for="file">{{bodyImageLabel}}</label>
+                </div>
               </div>
-              <span>Gambar harus memiliki ekstensi jpeg atau jpg.</span>
+
             </div>
-            
+
           </div>     
         <!-- /.row -->
       </div>

@@ -41,8 +41,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+              <li *ngFor="let category of categoryList"><a href="#">
+                <i class="fa fa-circle-o"></i> {{category.category.name}}</a>
+              </li>
             </ul>
           </li>
         </ul>

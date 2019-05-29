@@ -14,10 +14,18 @@ const compressor = new ImageCompressor();
 })
 export class AddnewsComponent implements OnInit {
 
-  fileInput: string = 'Pilih Gambar...';
-  primaryImage: string;
+  coverImageLabel: string = 'Pilih Gambar...';
+  bodyImageLabel: string = 'Pilih Gambar...';
+  otherImageLabel: string = 'Pilih Gambar...';
 
-  uploadData: FormGroup;
+  coverImageName: string;
+  bodyImageName: string;
+  otherImageName: string;
+
+
+  coverImage: FormGroup;
+  bodyImage: FormGroup;
+  otherImage: FormGroup;
 
   promises: Promise<Blob>[] = [];
 
@@ -25,44 +33,86 @@ export class AddnewsComponent implements OnInit {
 
   ngOnInit() {
     // init the news form
-    this.uploadData = this.formBuilder.group({
-      title: '',
-      summary: '',
-      body: '',
-      snippet: '',
+    this.coverImage = this.formBuilder.group({
       coverImages: ['']
+    });
+
+    this.bodyImage = this.formBuilder.group({
+      bodyImage: ['']
+    });
+
+    this.otherImage = this.formBuilder.group({
+      otherImage: [''],
+      description: ''
     });
   }
 
-  // fungsi untuk mengganti preview gambar utama
-  detectFiles(event) {
+  // fungsi untuk mengganti preview gambar utama dan gambar body
+  detectImage(event, type) {
     console.log(event.target.files);
     if(event.target.files.length > 0) {
-      let file = event.target.files[0];
+      let file = event.target.files;
 
-      // this.compressingImage(file);
       this.promises.push(compressor.compress(file, {quality: .5}));
-    
+  
       let temp = Promise.all(this.promises)
         .then(file => {
-          this.setImage(file);
+          if(type == 'cover')
+            this.setCoverImage(file);
+          else if(type == 'body')
+            this.setBodyImage(file);
         }
       );
-
-      // this.uploadData.get('coverImages').setValue(file);
-    }   
+    }      
   }
 
-  changeInputLabelImage (file: any[]) {
+  detectImages(event) {
+    console.log(event.target.files);
+    if(event.target.files.length > 0) {
+      let file = event.target.files;
+
+      for(let i = 0; i < file.length; i++) {
+        this.promises.push(compressor.compress(file, {quality: .5}));
+      }      
+
+      let temp = Promise.all(this.promises)
+        .then(file => {
+          this.setOtherImage(file);
+        }
+      );
+    }   
+  }
+  
+
+  changeInputLabel (file: any[], type) {
     const reader = new FileReader();
-    reader.onload = e => this.primaryImage = reader.result as string;
+    if(type == 'cover') {
+      reader.onload = e => this.coverImageLabel = reader.result as string;
+      this.fileInput = file[0].name;
+      reader.readAsDataURL(file[0]);  
+    }
+      
+  }
+
+  changeInputLabelOtherImage (file: any[]) {
+    const reader = new FileReader();
+    reader.onload = e => this.bodyImageLabel = reader.result as string;
     this.fileInput = file[0].name;
     reader.readAsDataURL(file[0]);    
   }
 
-  setImage(file: any[]) {
-    this.uploadData.get('coverImages').setValue(file[0]);
-    this.changeInputLabelImage(file);
+  setCoverImage(file) {
+    this.coverImage.get('coverImages').setValue(file);
+    this.changeInputLabelCoverImage(file);
+  }
+
+  setBodyImage(file) {
+    this.bodyImage.get('bodyImage').setValue(file);
+    // this.changeInputLabelImage(file);
+  }
+
+  setOtherImage(file: any[]) {
+    this.otherImage.get('otherImage').setValue(file);
   }
 
   addBerita(form) {
@@ -72,9 +122,11 @@ export class AddnewsComponent implements OnInit {
     const formData = new FormData();
     formData.append('title', temp.title);
     formData.append('summary', temp.summary);
-    formData.append('body', temp.body);
+    formData.append('body', temp.body1);
+    formData.append('body', temp.body2);
+    formData.append('body', temp.body3);    
     formData.append('snippet', temp.snippet);
-    formData.append('coverImages', this.uploadData.get('coverImages').value);
+    formData.append('coverImages', this.coverImage.get('coverImages').value);
 
     // console.log('cek',);
   
@@ -87,6 +139,8 @@ export class AddnewsComponent implements OnInit {
         console.log('err', err);
       }
     );
+
+    console.log('tetot');
     
   }
 

@@ -27,20 +27,22 @@
             <table class="table table-hover">
               <thead>
                 <tr>
+                  <th>No</th>
                   <th>Nama Kelompok</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let news of newsList; let i = index">
-                  <td [routerLink]="['/admin/berita-detail', news._id]">{{news.title}}</td>
+                <tr *ngFor="let category of categories; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{category.category.name}}</td>
                   <td>
-                    <a class="btn btn-danger" (click)="deleteNews(news._id)">
+                    <a class="btn btn-danger" (click)="editCategory(category.category.name, category.category._id)">
                       <i class="fa fa-trash"></i>
                     </a>
                   </td>
                 </tr>
-                <tr *ngIf="!newsList">
+                <tr *ngIf="!categories">
                   <td>Tidak ada kelompok yang dapat ditampilkan saat ini.</td>
                 </tr>
               </tbody>
@@ -55,6 +57,19 @@
         <div class="box">
           <div class="box-header">
             <h5>Tambahkan Kelompok Baru</h5>
+          </div>
+          <div class="box-body">
+            <div class="form-group">
+              <div class="row input-nama">
+                <label for="namaKelompok" class="col-sm-4 control-label">Nama Kelompok</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="namaKelompok" [(ngModel)]="nameInput.name" placeholder="Masukkan nama kelompok...">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <button (click)="addCategoryAction()" class="btn btn-success pull-right">Tambahkan</button>
           </div>
         </div>
           

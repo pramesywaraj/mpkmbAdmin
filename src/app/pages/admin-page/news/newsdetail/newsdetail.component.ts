@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { switchMap } from 'rxjs/operators';
+import { switchMap, retry, catchError, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { NewsService } from '../../../../services/news.service';
+import { ConfigService } from './../../../../services/config.service';
 
 
 @Component({
@@ -11,35 +13,46 @@ import { NewsService } from '../../../../services/news.service';
   templateUrl: './newsdetail.component.html',
   styleUrls: ['./newsdetail.component.scss']
 })
-export class NewsdetailComponent implements OnInit {
+export class NewsdetailComponent implements OnInit, OnDestroy {
 
   newsDetail: any;
+  newsImageCoverUrl: string = '';
+  private subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private news: NewsService) {
-
-    }
+    private news: NewsService,
+    private config: ConfigService
+  ) {}
 
   ngOnInit() {
-    // let temp = this.route.paramMap.pipe(
-    //   switchMap((params: ParamMap) => 
-    //     console.log(params.get('id')))
-    // );
-
     let id = this.route.snapshot.paramMap.get('id');
-    this.loadDetail(id);
-
-
-  }
-
-  loadDetail(id) {
-    this.news.getNewsDetail(id).subscribe(data => {
-      if(data.status == 200) {
+    // this.loadDetail(id);
+    this.subscription = this.news.getNewsDetail(id).subscribe(
+      data => {
         this.newsDetail = data.news;
-      }
-    });
+        this.newsImageCoverUrl = this.config.baseUrl + 'news/image/' + this.newsDetail.imageCover;
+        console.log(this.newsDetail);
+      },
+      err => console.log('err', err)
+    );
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  // loadDetail(id) {
+  //   // this.news.getNewsDetail(id).subscribe(
+  //   //   data => {
+  //   //     this.newsDetail = data.news;
+  //   //     this.newsImageCoverUrl = this.config.baseUrl + 'news/image/' + this.newsDetail.imageCover;
+  //   //     console.log(this.newsDetail);
+  //   //   },
+  //   //   err => console.log('err', err)
+  //   // );
+  //   const temp = 
+  // }
 
 }
