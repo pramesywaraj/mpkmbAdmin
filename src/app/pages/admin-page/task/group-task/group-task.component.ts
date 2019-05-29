@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskComponent } from '../task.component';
+import { TaskService } from '../../../../services/task.service';
 
 @Component({
   selector: 'app-group-task',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupTaskComponent implements OnInit {
 
-  constructor() { }
+  categoryTask: any;
+
+  constructor(private task: TaskService) { }
 
   ngOnInit() {
+    this.task.currentCategory.subscribe(
+      obj => this.categoryTask = obj
+    );
+    console.log('detail task', this.categoryTask);
   }
 
 }

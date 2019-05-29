@@ -43,7 +43,7 @@
         <tbody *ngIf="newsList.length > 0">
           <tr *ngFor="let news of newsList; let i = index">
             <td>{{i+1}}</td>
-            <td [routerLink]="['/admin/berita/berita-detail', news._id]">{{news.title}}</td>
+            <td [routerLink]="['/admin/berita-detail', news._id]">{{news.title}}</td>
             <td>{{news.summary}}</td>
             <td>
               <a class="btn btn-danger" (click)="deleteNews(news._id)">

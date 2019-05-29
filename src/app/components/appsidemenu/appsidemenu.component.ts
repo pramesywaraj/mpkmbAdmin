@@ -28,6 +28,7 @@ export class AppsidemenuComponent implements OnInit {
   goToGroupTask(category) {
     console.log('category detail', category);
     this.task.setCategoryData(category);
+    this.router.navigate(['admin/kelompok-detail', category.category._id]);
   }
 
   refresh() {

@@ -38,12 +38,10 @@ const routes: Routes = [
       {
         path: 'berita',
         component: NewsComponent,
-        children: [
-          {
-            path: 'berita-detail/:id',
-            component: NewsdetailComponent,
-          }
-        ]
+      },
+      {
+        path: 'berita-detail/:id',
+        component: NewsdetailComponent,
       },
       {
         path: 'tambah-berita',
@@ -52,12 +50,10 @@ const routes: Routes = [
       {
         path: 'penugasan',
         component: TaskComponent,
-        children: [
-          {
-            path: 'kelompok-detail/:id',
-            component: GroupTaskComponent,
-          }
-        ]
+      },
+      {
+        path: 'kelompok-detail/:id',
+        component: GroupTaskComponent,
       },
       {
         path: 'galeri',

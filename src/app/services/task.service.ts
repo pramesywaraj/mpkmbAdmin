@@ -79,6 +79,5 @@ export class TaskService {
 
   public setCategoryData(category) {
     this.categorySource.next(category);
-    console.log('naon', this.categorySource);
   }
 }
