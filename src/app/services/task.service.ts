@@ -35,7 +35,7 @@ export class TaskService {
           }
         ),
         catchError(err => {
-          console.log('This error inside the news service and addCategory function...', err);
+          console.log('This error inside the task service and addCategory function...', err);
           return throwError(err);
         })
       );
@@ -51,7 +51,7 @@ export class TaskService {
           }
         ),
         catchError(err => {
-          console.log('This error inside the news service and getCategory function...', err);
+          console.log('This error inside the task service and getCategory function...', err);
           return throwError(err);
         })
       );
@@ -71,7 +71,47 @@ export class TaskService {
           }
         ),
         catchError(err => {
-          console.log('This error inside the news service and editCategory function...', err);
+          console.log('This error inside the task service and editCategory function...', err);
+          return throwError(err);
+        })
+      );
+  }
+
+  public createTask(tasks): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.post<any>(
+      this.config.baseUrl + 'task/create', tasks, {headers: header})
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the task service and addTask function...', err);
+          return throwError(err);
+        })
+      );
+  }
+
+
+  public deleteTask(id): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+
+    return this.http.delete<any>(
+      this.config.baseUrl + 'task/delete/' + id)
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the task service and deleteTask function...', err);
           return throwError(err);
         })
       );

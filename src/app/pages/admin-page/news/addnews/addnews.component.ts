@@ -88,7 +88,7 @@ export class AddnewsComponent implements OnInit {
     const reader = new FileReader();
     if(type == 'cover') {
       reader.onload = e => this.coverImageLabel = reader.result as string;
-      this.fileInput = file[0].name;
+      // this.fileInput = file[0].name;
       reader.readAsDataURL(file[0]);  
     }
       

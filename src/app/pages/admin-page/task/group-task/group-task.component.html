@@ -6,11 +6,33 @@
 
       <div class="box">
         <div class="box-header">
-          <h5 *ngIf="categoryTask">{{categoryTask.category.name}}</h5>
+          <h5 *ngIf="onlyCategory">{{onlyCategory.name}}</h5>
         </div>
 
-        <div class="box-body">
-          
+        <div class="box-body table-responsive no-padding">
+          <div class="no-task" *ngIf="categoryTask.length == 0">
+            <p>Tidak tugas kelompok yang dapat ditampilkan saat ini.</p>
+          </div>
+          <table *ngIf="categoryTask.length != 0" class="table table-hover">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Judul</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of categoryTask; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{task.title}}</td>
+                <td>
+                  <a class="btn btn-danger" (click)="deleteTask(task._id)">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
         
@@ -19,46 +41,49 @@
     <div class="col-md-6">
 
       <div class="box">
-        <div class="box-header">
-          <h5>Tambahkan Tugas Baru</h5>
-        </div>
-        <div class="box-body">
-          <div class="form-group">
-            <div class="row input-row">
-              <label for="judulTugas" class="col-sm-4 control-label">Judul Tugas</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="judulTugas" placeholder="Masukkan judul tugas...">
+        <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)">
+          <div class="box-header">
+            <h5>Tambahkan Tugas Baru</h5>
+          </div>
+          <div class="box-body">
+            <div class="form-group">
+              <div class="row input-row">
+                <label for="judulTugas" class="col-sm-4 control-label">Judul Tugas</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="judulTugas" placeholder="Masukkan judul tugas..." name="taskTitle" ngModel required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row input-row">
+                <label for="deskripsiTugas" class="col-sm-4 control-label">Deskripsi Tugas</label>
+                <div class="col-sm-8">
+                  <textarea type="text" rows="2" class="form-control" id="deskripsiTugas" placeholder="Masukkan deskripsi tugas..." name="taskDesc" ngModel required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row input-row">
+                <label for="linkTugas" class="col-sm-4 control-label">Link Tugas Tambahan</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="linkTugas" placeholder="Masukkan link tugas..." name="taskLink" ngModel required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row input-row">
+                <label for="fotoTugas" class="col-sm-4 control-label">Gambar Tugas</label>
+                <div class="col-sm-8">
+                    <input (change)="detectImage($event)" type="file" id="fotoTugas" name="taskImg" accept="image/jpg, image/jpeg" ngModel required>
+                </div>
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="row input-row">
-              <label for="deskripsiTugas" class="col-sm-4 control-label">Deskripsi Tugas</label>
-              <div class="col-sm-8">
-                <textarea type="text" rows="2" class="form-control" id="deskripsiTugas" placeholder="Masukkan deskripsi tugas..."></textarea>
-              </div>
-            </div>
+          <div class="box-footer">
+            <button  class="btn btn-success pull-right">Tambah Tugas</button>
           </div>
-          <div class="form-group">
-            <div class="row input-row">
-              <label for="linkTugas" class="col-sm-4 control-label">Link Tugas Tambahan</label>
-              <div class="col-sm-8">
-                  <input type="text" class="form-control" id="linkTugas" placeholder="Masukkan link tugas...">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row input-row">
-              <label for="fotoTugas" class="col-sm-4 control-label">Gambar Tugas</label>
-              <div class="col-sm-8">
-                  <input type="file" id="fotoTugas" placeholder="Masukkan link tugas...">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="box-footer">
-          <button  class="btn btn-success pull-right">Tambahkan</button>
-        </div>
+        </form>
+       
       </div>
         
     </div>
