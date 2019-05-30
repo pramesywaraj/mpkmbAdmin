@@ -12,8 +12,10 @@ export class ConfigService {
   httpOptions: any;
 
   constructor() {
-    this.baseUrl = 'http://localhost:3056/';
-    this.newsImageUrl = 'http://localhost:3056/news/image/';
+    // this.baseUrl = 'http://localhost:3056/';
+    // this.newsImageUrl = 'http://localhost:3056/news/image/';
+    this.baseUrl = 'http://0.0.0.0:3056/';
+    this.newsImageUrl = 'http://0.0.0.0:3056/news/image/';
     // this.baseUrl = 'http://backend-mpkmb.codepanda.id/';
     this.httpOptions = {
       headers: new HttpHeaders({
