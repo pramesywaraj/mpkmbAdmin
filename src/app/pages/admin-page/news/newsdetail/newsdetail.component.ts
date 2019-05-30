@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { NewsService } from '../../../../services/news.service';
 import { ConfigService } from './../../../../services/config.service';
 
+declare var ImageCompressor: any;
+const compressor = new ImageCompressor();
 
 @Component({
   selector: 'app-newsdetail',
@@ -20,6 +22,13 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   newsImageUrl: string;
+
+  compressedBodyImage: any;
+  coverImageSrc: string;
+
+  promises: Promise<Blob>[] = [];
+
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +54,45 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  detectBodyImage(event) {
+    console.log('foto', event);
+    if(event.target.files.length > 0) {
+      
+      let file = event.target.files[0];
+      console.log('foto', file);
+    
+      this.promises = compressor.compress(file, {quality: .5});
+  
+      let temp = Promise.resolve(this.promises)
+        .then(file => {
+          this.compressedBodyImage = file;
+        }
+      );
+    }      
+  }
+
+  addBodyImage() {
+    if(this.compressedBodyImage) {
+      const formData = new FormData();
+      formData.append('bodyImages', this.compressedBodyImage);
+    
+      this.news.addNewsBodyImage(formData, this.newsDetail._id).subscribe(
+        data => {
+          alert('Gambar berhasil ditambahkan');
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(["admin/berita-detail/", this.newsDetail._id])
+          ); 
+        },
+        err => {
+          console.log('err', err);
+        }
+      );  
+    } else {
+      alert('Gambar belum Anda masukkan');
+    }
+    
   }
 
   // loadDetail(id) {
