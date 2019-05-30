@@ -103,7 +103,7 @@ export class TaskService {
 
 
     return this.http.delete<any>(
-      this.config.baseUrl + 'task/delete/' + id)
+      this.config.baseUrl + 'task/delete/' + id, {headers: header})
       .pipe(
         map(
           resp => {
