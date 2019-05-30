@@ -19,6 +19,8 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
   newsImageCoverUrl: string = '';
   private subscription: Subscription;
 
+  newsImageUrl: string;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -28,6 +30,7 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
+    this.newsImageUrl = this.config.newsImageUrl;
     // this.loadDetail(id);
     this.subscription = this.news.getNewsDetail(id).subscribe(
       data => {

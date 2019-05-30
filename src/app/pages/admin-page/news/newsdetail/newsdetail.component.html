@@ -45,7 +45,7 @@
     <div *ngIf="newsDetail != null" class="box-body">
         <div class="row">
           <div class="col-md-6">
-            <div class="image-preview">
+            <div class="image-cover image-300">
               <img 
                 [src]="newsImageCoverUrl || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-500x382.jpg'" 
                 alt="your image"
@@ -67,11 +67,32 @@
             </div>
           </div>
         </div>
+
+        <!-- News Body Section -->
         <div class="row">
           <div class="col-md-12">
             <p id="newsBody">{{newsDetail.body1}}</p>
+            <div *ngIf="newsDetail.imageBody != null" class="image-cover image-300">
+              <img [src]="newsImageUrl + newsDetail.imageBody" alt="">
+            </div>
             <p id="newsBody">{{newsDetail.body2}}</p>
             <p id="newsBody">{{newsDetail.body3}}</p>            
+          </div>
+        </div>
+        
+        <!-- Other images Section -->
+        <div *ngIf="newsDetail.otherImages != null" class="row">
+          <div class="col-md-3 image-cover">
+            <img [src]="newsImageUrl + newsDetail.otherImages.images1" alt="">
+          </div>
+          <div class="col-md-3 image-cover">
+            <img [src]="newsImageUrl + newsDetail.otherImages.images2" alt="">
+          </div>
+          <div class="col-md-3 image-cover">
+            <img [src]="newsImageUrl + newsDetail.otherImages.images3" alt="">
+          </div>
+          <div class="col-md-3 image-cover">
+            <img [src]="newsImageUrl + newsDetail.otherImages.images4" alt="">
           </div>
         </div>    
       <!-- /.row -->
@@ -120,7 +141,7 @@
             <div class="row input-row">
               <label for="fotoLain" class="col-sm-4 control-label">Foto Lain Berita</label>
               <div class="col-sm-8">
-                  <input (change)="detectOtherImage($event)" type="file" id="fotoLain" name="otherImg" accept="image/jpg, image/jpeg" ngModel required>
+                  <input (change)="detectOtherImage($event)" multiple type="file" id="fotoLain" name="otherImg" accept="image/jpg, image/jpeg" ngModel required>
               </div>
             </div>
           </div>
