@@ -15,7 +15,7 @@ import { ConfigService } from './../../../../services/config.service';
 })
 export class NewsdetailComponent implements OnInit, OnDestroy {
 
-  newsDetail: any;
+  newsDetail: any = null;
   newsImageCoverUrl: string = '';
   private subscription: Subscription;
 
@@ -31,9 +31,10 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
     // this.loadDetail(id);
     this.subscription = this.news.getNewsDetail(id).subscribe(
       data => {
-        this.newsDetail = data.news;
+        console.log('data', data);
+        let temp = data.news;
+        this.newsDetail = temp;
         this.newsImageCoverUrl = this.config.baseUrl + 'news/image/' + this.newsDetail.imageCover;
-        console.log(this.newsDetail);
       },
       err => console.log('err', err)
     );

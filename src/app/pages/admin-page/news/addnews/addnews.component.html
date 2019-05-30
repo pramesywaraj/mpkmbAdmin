@@ -58,7 +58,7 @@
                 <label>Gambar Utama Berita</label>
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="file" 
-                    (change)="detectImage($event, 'cover')" 
+                    (change)="detectImage($event)" 
                     name="coverImages" 
                     accept="image/jpg, image/jpeg" 
                     ngModel required
@@ -67,12 +67,12 @@
                 </div>
               </div>
               <div class="image-preview">
-                <!-- <img 
-                  [src]="coverImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
+                <img 
+                  [src]="coverImageSrc || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
                   alt="your image"
-                /> -->
+                />
               </div>
-
+<!-- 
               <div class="form-group">
                 <label>Gambar di Tubuh Berita</label>
                 <div class="custom-file">
@@ -84,7 +84,7 @@
                   >
                   <label class="custom-file-label" for="file">{{bodyImageLabel}}</label>
                 </div>
-              </div>
+              </div> -->
               <!-- <div class="image-preview">
                 <img 
                   [src]="bodyImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
@@ -92,7 +92,7 @@
                 />
               </div> -->
               
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>Gambar di Lainnya</label>
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="file" 
@@ -103,7 +103,7 @@
                   >
                   <label class="custom-file-label" for="file">{{bodyImageLabel}}</label>
                 </div>
-              </div>
+              </div> -->
 
             </div>
 

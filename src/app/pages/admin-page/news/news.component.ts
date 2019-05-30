@@ -27,6 +27,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   private getNews() {
     this.subscription = this.news.getNews().subscribe(
       data => {
+        console.log('data news', data);
         this.newsList = data.news.docs;
         console.log(this.newsList);
       }
@@ -42,7 +43,9 @@ export class NewsComponent implements OnInit, OnDestroy {
     if(confirm('Apakah Anda yakin akan menghapus berita ini?')) {
       this.news.deleteNews(id).subscribe(data => {
         alert('Berita berhasil dihapus.');
-        this.router.navigate(['admin/berita']);
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(["admin/berita"])
+          ); 
       });
     }
   }
