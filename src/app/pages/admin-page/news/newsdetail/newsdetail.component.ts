@@ -24,6 +24,9 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
   newsImageUrl: string;
 
   compressedBodyImage: any;
+  compressedOtherImage: any;
+  description: string = 'wawa';
+
   coverImageSrc: string;
 
   promises: Promise<Blob>[] = [];
@@ -73,12 +76,55 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
     }      
   }
 
+  detectOtherImages(event) {
+    console.log('foto', event);
+    if(event.target.files.length > 0) {
+
+      let file = event.target.files;
+
+      for(let i = 0; i < file.length; i++) {
+        this.promises.push(compressor.compress(file[i], {quality: .5}));
+      }      
+        
+      let temp = Promise.all(this.promises)
+        .then(file => {
+          this.compressedOtherImage = file;
+          console.log('other', this.compressedOtherImage);
+        }
+      );
+    }      
+  }
+
   addBodyImage() {
-    if(this.compressedBodyImage) {
+    if(this.compressedBodyImage != null) {
       const formData = new FormData();
       formData.append('bodyImages', this.compressedBodyImage);
     
       this.news.addNewsBodyImage(formData, this.newsDetail._id).subscribe(
+        data => {
+          alert('Gambar berhasil ditambahkan');
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(["admin/berita-detail/", this.newsDetail._id])
+          ); 
+        },
+        err => {
+          console.log('err', err);
+        }
+      );  
+    } else {
+      alert('Gambar belum Anda masukkan');
+    }
+    
+  }
+  
+  addOtherImage() {
+    if(this.compressedOtherImage != null) {
+
+      const formData = new FormData();
+      formData.append('description', this.description);
+      formData.append('otherImages', this.compressedOtherImage);
+    
+      this.news.addNewsOtherImage(formData, this.newsDetail._id).subscribe(
         data => {
           alert('Gambar berhasil ditambahkan');
           this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>

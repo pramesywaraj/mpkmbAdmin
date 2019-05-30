@@ -108,5 +108,27 @@ export class NewsService {
     ); 
   }
 
+  public addNewsOtherImage(file, newsId): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+    console.log("res", file);
+    console.log("res", newsId);    
+
+    return this.http.post<any>(
+      this.config.baseUrl + 'news/upload/otherImages/' + newsId, file, {headers: header}
+    ).pipe(
+      map(
+        resp => {
+          return resp;
+        }
+      ),
+      catchError(err => {
+        console.log('This error inside the news service and addNewsBody function...', err);
+        return throwError(err);
+      })
+    ); 
+  }
+
   
 }
