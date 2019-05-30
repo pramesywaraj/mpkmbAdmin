@@ -32,7 +32,9 @@ export class AuthService {
           }
           
           return resp;
-        })
+        },
+        err => alert(err)
+        )
       );
   }
 

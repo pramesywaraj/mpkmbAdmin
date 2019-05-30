@@ -47,8 +47,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       if(data.status == 200) {
         this.router.navigate(['/admin/dashboard']);
         alert('Anda berhasil Login.');
-      } else if(data.status == 401) {
-        alert('Password Anda atau email salah.');
+      } else {
+        alert(data.message);
       }
     },
     err => {
