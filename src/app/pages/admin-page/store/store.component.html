@@ -17,7 +17,10 @@
         </div>
 
         <div class="box-body table-responsive no-padding">
-          <table class="table table-hover">
+          <div class="no-task" *ngIf="goods.length == 0">
+            <p>Tidak barang yang dapat ditampilkan saat ini.</p>
+          </div>
+          <table *ngIf="goods.length > 0" class="table table-hover">
             <thead>
               <tr>
                 <th>No</th>
@@ -38,9 +41,6 @@
                     <i class="fa fa-trash"></i>
                   </a>
                 </td>
-              </tr>
-              <tr *ngIf="!goods">
-                <td>Tidak ada barang yang dapat ditampilkan saat ini.</td>
               </tr>
             </tbody>
           </table>

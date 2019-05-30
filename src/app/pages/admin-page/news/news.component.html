@@ -28,7 +28,10 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
-      <table class="table table-hover">
+      <div class="no-task" *ngIf="newsList.length == 0">
+        <p>Tidak barang yang dapat ditampilkan saat ini.</p>
+      </div>
+      <table *ngIf="newsList.length > 0" class="table table-hover">
         <thead>
           <tr>
             <th>No</th>
@@ -37,10 +40,7 @@
             <th></th>
           </tr>
         </thead>
-        <tbody *ngIf="newsList.length == 0" class="news-none">
-          Tidak ada berita yang ditampilkan saat ini.
-        </tbody>
-        <tbody *ngIf="newsList.length > 0">
+        <tbody>
           <tr *ngFor="let news of newsList; let i = index">
             <td>{{i+1}}</td>
             <td [routerLink]="['/admin/berita-detail', news._id]">{{news.title}}</td>
