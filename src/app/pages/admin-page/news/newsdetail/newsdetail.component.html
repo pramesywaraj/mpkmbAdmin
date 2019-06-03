@@ -20,7 +20,7 @@
       <!-- <div class="row"> -->
 
         <!-- <div class="col-md-6"> -->
-          <h3 class="box-title" *ngIf="newsDetail != null">{{newsDetail.title}}</h3>
+          <h3 class="box-title" *ngIf="newsDetail != null">{{newsDetail?.title}}</h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -55,15 +55,15 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="highlightBerita">Highlight Berita</label>
-              <p id='highlightBerita'>{{newsDetail.summary}}</p>
+              <p id='highlightBerita'>{{newsDetail?.summary}}</p>
             </div>
             <div class="form-group">
               <label for="captionBerita">Caption Berita</label>
-              <p id="captionBerita">{{newsDetail.snippet}}</p>
+              <p id="captionBerita">{{newsDetail?.snippet}}</p>
             </div>
             <div class="form-group">
               <label for="tanggalBerita">Tanggal Pembuatan</label>
-              <p id="tanggalBerita">{{newsDetail.date | date:'medium'}}</p>
+              <p id="tanggalBerita">{{newsDetail?.date | date:'medium'}}</p>
             </div>
           </div>
         </div>
@@ -71,12 +71,12 @@
         <!-- News Body Section -->
         <div class="row">
           <div class="col-md-12">
-            <p id="newsBody">{{newsDetail.body1}}</p>
+            <p id="newsBody">{{newsDetail?.body1}}</p>
             <div *ngIf="newsDetail.imageBody != null" class="image-cover image-300">
-              <img [src]="newsImageUrl + newsDetail.imageBody" alt="">
+              <img [src]="newsImageUrl + newsDetail?.imageBody" alt="">
             </div>
-            <p id="newsBody">{{newsDetail.body2}}</p>
-            <p id="newsBody">{{newsDetail.body3}}</p>            
+            <p id="newsBody">{{newsDetail?.body2}}</p>
+            <p id="newsBody">{{newsDetail?.body3}}</p>            
           </div>
         </div>
         
@@ -102,7 +102,7 @@
 
   <div class="row">
 
-    <div *ngIf="!newsDetail.imageBody" class="col-md-6">
+    <div *ngIf="!newsDetail?.imageBody" class="col-md-6">
       <div  class="box box-default">
         <div class="box-header with-border">    
           <h3 class="box-title">Tambahkan foto tubuh berita</h3>
@@ -129,7 +129,7 @@
       </div>
     </div>
 
-    <div *ngIf="!newsDetail.otherImages" class="col-md-6">
+    <div *ngIf="!newsDetail?.otherImages" class="col-md-6">
       <div class="box box-default">
         <div class="box-header with-border">    
           <h3 class="box-title">Tambahkan foto lain berita</h3>
@@ -142,9 +142,9 @@
         <div class="box-body">
             <div class="form-group">
               <div class="row input-row">
-                <label for="deskripsi" class="col-sm-4 control-label">Foto Lain Berita</label>
+                <label for="deskripsi" class="col-sm-4 control-label">Deskripsi</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="deskripsi" placeholder="Masukkan deskripsi gambar..." [ngModel]="description" required>
+                  <input type="text" class="form-control" id="deskripsi" placeholder="Masukkan deskripsi gambar..." [(ngModel)]="description" required>
                 </div>
               </div>
             </div>

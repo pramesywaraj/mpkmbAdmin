@@ -10,6 +10,8 @@ export class GalleryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let element = document.getElementById('tab_1');
+    console.log('elemetn', element.className);
   }
 
 }

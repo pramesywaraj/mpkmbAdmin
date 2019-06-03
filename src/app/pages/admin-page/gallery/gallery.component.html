@@ -1,3 +1,111 @@
-<p>
-  gallery works!
-</p>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Dokumentasi Kegiatan
+  </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Gallery Video</a></li>
+          <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Gallery Foto</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab_1">
+
+            <div class="row">
+              <div class="col-md-6">
+          
+                <div class="box">
+                  <div class="box-header">
+                    <h5>Daftar Video yang ada pada Web</h5>
+                  </div>
+          
+                  <div class="box-body table-responsive no-padding">
+                    <div class="no-task" *ngIf="categoryTask.length == 0">
+                      <p>Tidak tugas kelompok yang dapat ditampilkan saat ini.</p>
+                    </div>
+                    <table *ngIf="categoryTask.length != 0" class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Judul</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let task of categoryTask; let i = index">
+                          <td>{{i+1}}</td>
+                          <td>{{task.title}}</td>
+                          <td>
+                            <a class="btn btn-danger" (click)="deleteTask(task._id)">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                  
+              </div>
+          
+              <div class="col-md-6">
+          
+                <div class="box">
+                  
+                  <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)">
+                    <div class="box-header">
+                      <h5>Tambahkan Video baru pada Web</h5>
+                    </div>
+                    <div class="box-body">
+                      <div class="form-group">
+                        <div class="row input-row">
+                          <label for="videoTitle" class="col-sm-4 control-label">Judul Video</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" id="videoTitle" placeholder="Masukkan judul video..." name="videoTitle" ngModel required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row input-row">
+                          <label for="videoLink" class="col-sm-4 control-label">Link Video</label>
+                          <div class="col-sm-8">
+                            <textarea type="text" rows="2" class="form-control" id="videoLink" placeholder="Masukkan link video..." name="videoLink" ngModel required></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="box-footer">
+                      <button  class="btn btn-success pull-right">Tambah Video</button>
+                    </div>
+                  </form>
+                 
+                </div>
+                  
+              </div>
+            </div>
+    
+            
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_2">
+            
+          </div>
+          <!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-content -->
+      </div>
+    </div>
+   
+          
+  </div>
+  
+
+</section>
+<!-- /.content -->

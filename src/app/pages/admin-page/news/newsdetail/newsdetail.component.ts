@@ -25,7 +25,7 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
 
   compressedBodyImage: any;
   compressedOtherImage: any;
-  description: string = 'wawa';
+  description: string = '';
 
   coverImageSrc: string;
 
@@ -46,10 +46,18 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
     // this.loadDetail(id);
     this.subscription = this.news.getNewsDetail(id).subscribe(
       data => {
-        console.log('data', data);
-        let temp = data.news;
-        this.newsDetail = temp;
-        this.newsImageCoverUrl = this.config.baseUrl + 'news/image/' + this.newsDetail.imageCover;
+        if(data.status == 200) {
+          let temp = data.news;
+          this.newsDetail = temp;
+          this.newsImageCoverUrl = this.config.baseUrl + 'news/image/' + this.newsDetail.imageCover;
+        } else if(data.status == 404) {
+          alert('Berita sudah tidak ada.');
+          this.router.navigate(['admin/berita']);
+        } else {
+          alert(data.message);
+          this.router.navigate(['admin/berita']);
+        }
+        
       },
       err => console.log('err', err)
     );
@@ -70,7 +78,8 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
   
       let temp = Promise.resolve(this.promises)
         .then(file => {
-          this.compressedBodyImage = file;
+          console.log('tes', file);
+          // this.compressedBodyImage = file;
         }
       );
     }      
@@ -88,8 +97,9 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
         
       let temp = Promise.all(this.promises)
         .then(file => {
-          this.compressedOtherImage = file;
-          console.log('other', this.compressedOtherImage);
+          console.log('check', file);
+          // this.compressedOtherImage = file;
+          // console.log('other', this.compressedOtherImage);
         }
       );
     }      
@@ -126,10 +136,12 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
     
       this.news.addNewsOtherImage(formData, this.newsDetail._id).subscribe(
         data => {
+          console.log('data', data);
           alert('Gambar berhasil ditambahkan');
           this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
             this.router.navigate(["admin/berita-detail/", this.newsDetail._id])
-          ); 
+          );
+          
         },
         err => {
           console.log('err', err);
