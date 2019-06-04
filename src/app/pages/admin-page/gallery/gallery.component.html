@@ -12,11 +12,11 @@
     <div class="col-md-12">
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Gallery Video</a></li>
-          <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Gallery Foto</a></li>
+          <li class="" [class.active]="viewTab == 'tab1'" (click)="viewTab = 'tab1'"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Gallery Video</a></li>
+          <li class="" [class.active]="viewTab == 'tab2'" (click)="viewTab = 'tab2'"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Gallery Foto</a></li>
         </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="tab_1">
+        <div class="tab-content" [ngSwitch]="viewTab">
+          <div class="tab-pane" id="tab_1" *ngSwitchCase="'tab1'">
 
             <div class="row">
               <div class="col-md-6">
@@ -27,23 +27,30 @@
                   </div>
           
                   <div class="box-body table-responsive no-padding">
-                    <div class="no-task" *ngIf="categoryTask.length == 0">
-                      <p>Tidak tugas kelompok yang dapat ditampilkan saat ini.</p>
+                    <div class="no-task" *ngIf="videosList?.length == 0">
+                      <p>Tidak tugas video yang dapat ditampilkan saat ini.</p>
                     </div>
-                    <table *ngIf="categoryTask.length != 0" class="table table-hover">
+                    <table *ngIf="videosList?.length != 0" class="table table-hover">
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>Judul</th>
+                          <th>Judul Video</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let task of categoryTask; let i = index">
+                        <tr *ngFor="let video of videosList; let i = index">
                           <td>{{i+1}}</td>
-                          <td>{{task.title}}</td>
                           <td>
-                            <a class="btn btn-danger" (click)="deleteTask(task._id)">
+                            <a href="https://youtube.com/watch?v={{video.url}}">
+                              {{video.title}}
+                            </a>
+                          </td>
+                          <td>
+                            <a class="btn btn-success" (click)="editVideo(task._id)">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="btn btn-danger" (click)="deleteVideo(task._id)">
                               <i class="fa fa-trash"></i>
                             </a>
                           </td>
@@ -66,17 +73,17 @@
                     <div class="box-body">
                       <div class="form-group">
                         <div class="row input-row">
-                          <label for="videoTitle" class="col-sm-4 control-label">Judul Video</label>
-                          <div class="col-sm-8">
+                          <label for="videoTitle" class="col-sm-3 control-label">Judul Video</label>
+                          <div class="col-sm-9">
                             <input type="text" class="form-control" id="videoTitle" placeholder="Masukkan judul video..." name="videoTitle" ngModel required>
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
                         <div class="row input-row">
-                          <label for="videoLink" class="col-sm-4 control-label">Link Video</label>
-                          <div class="col-sm-8">
-                            <textarea type="text" rows="2" class="form-control" id="videoLink" placeholder="Masukkan link video..." name="videoLink" ngModel required></textarea>
+                          <label for="videoId" class="col-sm-3 control-label">Video ID</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="videoId" placeholder="Masukkan Id video (youtube.com/watch?v=id_video)" name="videoId" ngModel required>
                           </div>
                         </div>
                       </div>
@@ -94,7 +101,7 @@
             
           </div>
           <!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_2">
+          <div class="tab-pane" id="tab_2" *ngSwitchCase="'tab2'">
             
           </div>
           <!-- /.tab-pane -->
