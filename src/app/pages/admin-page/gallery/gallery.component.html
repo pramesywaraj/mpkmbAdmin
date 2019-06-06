@@ -7,6 +7,33 @@
 
 <!-- Main content -->
 <section class="content">
+  <div class="box">
+      <div class="box-header">
+        <h5>Tambah Kategori Foto</h5>
+      </div>
+      <div class="box-body">
+        
+        <div class="row">
+          <div class="col-md-6">
+            <form #categoryForm="ngForm" (ngSubmit)="addPhotoCategories(categoryForm)">
+              <div class="form-group">
+                <div class="row input-row">
+                  <label for="namaKategori" class="col-sm-4 control-label">Nama Kategori</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="namaKategori" placeholder="Masukkan nama kategori" name="categoryName" ngModel required>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success pull-right">Tambah Kategori</button>
+            </form>
+          </div>
+        </div>
+       
+      </div>
+      <div class="box-footer">
+      </div>
+  </div>
+        
 
   <div class="row">
     <div class="col-md-12">
@@ -16,7 +43,7 @@
           <li class="" [class.active]="viewTab == 'tab2'" (click)="viewTab = 'tab2'"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Gallery Foto</a></li>
         </ul>
         <div class="tab-content" [ngSwitch]="viewTab">
-          <div class="tab-pane" id="tab_1" *ngSwitchCase="'tab1'">
+          <div class="tab-pane" [class.active]="viewTab == 'tab1'" id="tab_1" *ngSwitchCase="'tab1'">
 
             <div class="row">
               <div class="col-md-6">
@@ -47,10 +74,7 @@
                             </a>
                           </td>
                           <td>
-                            <a class="btn btn-success" (click)="editVideo(task._id)">
-                              <i class="fa fa-edit"></i>
-                            </a>
-                            <a class="btn btn-danger" (click)="deleteVideo(task._id)">
+                            <a class="btn btn-danger" (click)="deleteVideo(video._id)">
                               <i class="fa fa-trash"></i>
                             </a>
                           </td>
@@ -66,7 +90,7 @@
           
                 <div class="box">
                   
-                  <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)">
+                  <form #videoForm="ngForm" (ngSubmit)="addVideo(videoForm)">
                     <div class="box-header">
                       <h5>Tambahkan Video baru pada Web</h5>
                     </div>
@@ -81,9 +105,9 @@
                       </div>
                       <div class="form-group">
                         <div class="row input-row">
-                          <label for="videoId" class="col-sm-3 control-label">Video ID</label>
+                          <label for="videoId" class="col-sm-3 control-label">Link Video</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="videoId" placeholder="Masukkan Id video (youtube.com/watch?v=id_video)" name="videoId" ngModel required>
+                            <input type="text" class="form-control" id="videoId" placeholder="Masukkan Id video (youtube.com/watch?v=id_video)" name="videoUrl" ngModel required>
                           </div>
                         </div>
                       </div>
@@ -101,8 +125,99 @@
             
           </div>
           <!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_2" *ngSwitchCase="'tab2'">
-            
+          <div class="tab-pane" [class.active]="viewTab == 'tab2'" id="tab_2" *ngSwitchCase="'tab2'">
+
+            <div class="row">
+              <div class="col-md-6">
+          
+                <div class="box">
+                  <div class="box-header">
+                    <h5>Daftar Foto yang ada pada Web</h5>
+                  </div>
+          
+                  <div class="box-body table-responsive no-padding">
+                    <div class="no-task" *ngIf="photosList?.length == 0">
+                      <p>Tidak foto yang dapat ditampilkan saat ini.</p>
+                    </div>
+                    <table *ngIf="photosList?.length != 0" class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Judul Foto</th>
+                          <th>Kategori</th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let photo of photosList; let i = index">
+                          <td>{{i+1}}</td>
+                          <td>
+                            <a href="{{photo.url}}">
+                              Gambar {{i+1}}
+                            </a>
+                          </td>
+                          <!-- <td>{{photo}}</td> -->
+                          <td>
+                            <a class="btn btn-danger" (click)="deletePhoto(photo._id)">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </td>
+                          <td>
+                            <!-- Rounded switch -->
+                            <label class="switch">
+                              <input type="checkbox">
+                              <span class="slider round"></span>
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                  
+              </div>
+          
+              <div class="col-md-6">
+          
+                <div class="box">
+                  
+                  <form #photoForm="ngForm" (ngSubmit)="addPhoto(photoForm)">
+                    <div class="box-header">
+                      <h5>Tambahkan Foto baru pada Web</h5>
+                    </div>
+                    <div class="box-body">
+                      <div class="form-group">
+                        <div class="row input-row">
+                          <label for="videoTitle" class="col-sm-3 control-label">Judul Foto</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="videoTitle" placeholder="Masukkan judul foto..." name="photoTitle" ngModel required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row input-row">
+                          <label for="photoUrl" class="col-sm-3 control-label">Link Foto</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="photoUrl" placeholder="Masukkan link foto yang akan ditampilkan" name="photoUrl" ngModel required>
+                          </div>
+                        </div>
+                      </div>
+                      <select class="form-control" name="categoryId" ngModel required>
+                        <option *ngFor="let category of categoriesList" value="category._id">{{category.name}}</option>
+                        <option *ngIf="!categoriesList">Anda belum menambahkan Kategori.</option>                        
+                      </select>
+                    </div>
+                    <div class="box-footer">
+                      <button  class="btn btn-success pull-right">Tambah Foto</button>
+                    </div>
+                  </form>
+                  
+                </div>
+                  
+              </div>
+            </div>
+        
           </div>
           <!-- /.tab-pane -->
         </div>
