@@ -89,4 +89,21 @@ export class StoreService {
         })
       );
   }
+
+  public orderList(): Observable<any> {
+    return this.http.get<any>(
+      this.config.baseUrl + 'order/list/')
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the store service and orderList function...', err);
+          return throwError(err);
+        })
+      );
+  }
+  
 }

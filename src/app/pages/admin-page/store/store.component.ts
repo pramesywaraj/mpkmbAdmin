@@ -20,20 +20,34 @@ export class StoreComponent implements OnInit, OnDestroy {
   compressedImage: any;
 
   goods = [];
+  orderList = [];
 
   constructor(private store: StoreService, private router: Router) { }
 
   ngOnInit() {
-    this. subscription = this.store.getGoods().subscribe(data => {
+    this.subscription = this.store.getGoods().subscribe(data => {
       if(data.status == 200) {
         this.goods = data.stores.docs;
         console.log(this.goods);
       }
     });
+
+    this.getOrderList();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  async getOrderList() {
+    await this.store.orderList().subscribe(data => {
+      if(data.status == 200) {
+        this.orderList = data.orders;
+        this.orderList.reverse();
+      } else {
+        alert(data.message);
+      }
+    });
   }
 
   addGoods(goods) {

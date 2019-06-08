@@ -106,38 +106,31 @@
     </div>
 
     <div class="box-body table-responsive no-padding">
-      <div class="no-task" *ngIf="videosList?.length == 0">
-        <p>Tidak tugas video yang dapat ditampilkan saat ini.</p>
+      <div class="no-task" *ngIf="orderList?.length == 0">
+        <p>Tidak ada pesanan yang dapat ditampilkan.</p>
       </div>
-      <table *ngIf="videosList?.length != 0" class="table table-hover">
+      <table *ngIf="orderList?.length != 0" class="table table-hover">
         <thead>
           <tr>
             <th>No</th>
-            <th>Judul Video</th>
-            <th>Tampilkan/Tidak</th>
-            <th></th>                          
+            <th>Nama Pembeli</th>
+            <th>Fakultas</th>
+            <th>Email</th>
+            <th>Kontak</th>                          
+            <th>Barang yang dibeli</th>
+            <th></th>                                                               
+                                      
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let video of videosList; let i = index">
+          <tr *ngFor="let order of orderList; let i = index">
             <td>{{i+1}}</td>
-            <td>
-              <a href="https://youtube.com/watch?v={{video.url}}">
-                {{video.title}}
-              </a>
-            </td>
-            <td>
-              <!-- Rounded switch -->
-              <label class="switch">
-                <input type="checkbox" [(ngModel)]="video.status" (change)="updateVideoStatus(video._id, video.status)" />
-                <span class="slider round"></span>
-              </label>
-            </td>
-            <td>
-              <a class="btn btn-danger" (click)="deleteVideo(video._id)">
-                <i class="fa fa-trash"></i>
-              </a>
-            </td>
+            <td>{{order.fullName}}</td>
+            <td>{{order.faculty}}</td>
+            <td>{{order.email}}</td>
+            <td>{{order.contact}}</td>
+            <td>{{order.items}}</td>
+            <td></td>
           </tr>
         </tbody>
       </table>
