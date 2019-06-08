@@ -126,4 +126,83 @@ export class GalleryService {
         })
       );
   }
+
+  public deleteVideo(videoId): Observable<any> {
+    return this.http.delete<any>(
+      this.config.baseUrl + 'galery/video/delete/' + videoId)
+      .pipe(
+        map(
+          resp => {
+            console.log('debug', resp);
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the gallery service and addCategory function...', err);
+          return err;
+        })
+      );
+  }
+
+  
+  public deletePhoto(photoId): Observable<any> {
+    return this.http.delete<any>(
+      this.config.baseUrl + 'galery/image/delete/' + photoId)
+      .pipe(
+        map(
+          resp => {
+            console.log('debug', resp);
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the gallery service and addCategory function...', err);
+          return err;
+        })
+      );
+  }
+
+  public editPhoto(photoId, obj): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Content-Type', 'application/json');
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.post<any>(
+      this.config.baseUrl + 'galery/image/edit/' + photoId, JSON.stringify(obj), {headers: header})
+      .pipe(
+        map(
+          resp => {
+            console.log('debug', resp);
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the gallery service and addCategory function...', err);
+          return err;
+        })
+      );
+  }
+
+  public editVideo(videoId, obj): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Content-Type', 'application/json');
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.post<any>(
+      this.config.baseUrl + 'galery/video/edit/' + videoId, JSON.stringify(obj), {headers: header})
+      .pipe(
+        map(
+          resp => {
+            console.log('debug', resp);
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the gallery service and addCategory function...', err);
+          return err;
+        })
+      );
+  }
+
+
 }

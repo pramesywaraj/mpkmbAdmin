@@ -60,6 +60,58 @@ export class GalleryComponent implements OnInit, OnDestroy {
     });
   }
 
+  async updatePhotoStatus(id, event: any){
+    let updateObj = {
+      'status' : null
+    };
+
+    if(event) {
+      updateObj.status = true;
+      console.log('On', updateObj.status);
+      // Update Photo status to true
+      await this.gallery.editPhoto(id, updateObj).subscribe(data => {
+        if(data.status == 201) {
+          console.log('Ubah berhasil');
+        }
+      });
+    } else if(!event) {
+      updateObj.status = false;
+      console.log('On', updateObj.status);
+      // Update Photo status to false
+      await this.gallery.editPhoto(id, updateObj).subscribe(data => {
+        if(data.status == 201) {
+          console.log('Ubah berhasil');
+        }
+      });
+    }
+  }
+
+  async updateVideoStatus(id, event: any){
+    let updateObj = {
+      'status' : null
+    };
+
+    if(event) {
+      updateObj.status = true;
+      console.log('On', updateObj.status);
+      // Update Photo status to true
+      await this.gallery.editVideo(id, updateObj).subscribe(data => {
+        if(data.status == 201) {
+          console.log('Ubah berhasil');
+        }
+      });
+    } else if(!event) {
+      updateObj.status = false;
+      console.log('On', updateObj.status);
+      // Update Photo status to false
+      await this.gallery.editVideo(id, updateObj).subscribe(data => {
+        if(data.status == 201) {
+          console.log('Ubah berhasil');
+        }
+      });
+    }
+  }
+
   addPhotoCategories(categories) {
     if(categories) {
       let temp = categories.value;
@@ -136,6 +188,40 @@ export class GalleryComponent implements OnInit, OnDestroy {
     } else {
       alert('Anda belum mengisi form tambah video!');
     }
+  }
+
+  deleteVideo(id) {
+    if(confirm('Apakah Anda yakin untuk menghapus video ini dari website?')) {
+      this.gallery.deleteVideo(id).subscribe(data => {
+        if(data.status == 200) {
+          alert('Video berhasil dihapus.');
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(["admin/galeri"])
+          ); 
+        }
+      })
+    } else {
+      alert('Video tidak dihapus.');
+    }
+  }
+
+  deletePhoto(id) {
+    if(confirm('Apakah Anda yakin untuk menghapus foto ini dari website?')) {
+      this.gallery.deletePhoto(id).subscribe(data => {
+        if(data.status == 200) {
+          alert('Foto berhasil dihapus.');
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(["admin/galeri"])
+          ); 
+        }
+      })
+    } else {
+      alert('Foto tidak dihapus.');
+    }
+  }
+
+  updateStatus() {
+
   }
 
 }
