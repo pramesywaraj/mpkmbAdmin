@@ -53,4 +53,20 @@ export class TimelineService {
         })
       );
   }
+
+  public deleteTimeline(id) {
+    return this.http.delete<any>(
+      this.config.baseUrl + 'timeline/delete/' + id)
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the timeline service and deleteTimeline function...', err);
+          return throwError(err);
+        })
+      );
+  }
 }

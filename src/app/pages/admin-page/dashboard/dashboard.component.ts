@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(public timeline: TimelineService, private router: Router) { }
+  constructor(public timeline: TimelineService, public router: Router) { }
 
   ngOnInit() {
     this.subscription = this.timeline.getTimeline().subscribe(data => {
@@ -49,6 +49,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
     } else {
       alert('Ada bagian yang belum terisi.');
+    }
+  }
+
+  deleteTimeline(id) {
+    if(id != null) {
+      this.timeline.deleteTimeline(id).subscribe(data => {
+        if(data.status == 200) {
+          alert('Kegiatan berhasil dihapus dari Jadwal Kegiatan.');
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(["admin/dashboard"])
+          ); 
+        }
+      });
+    } else {
+      alert('Kegiatan tidak valid.');
     }
   }
 
