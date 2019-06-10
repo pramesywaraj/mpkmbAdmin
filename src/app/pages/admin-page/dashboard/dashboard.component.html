@@ -74,7 +74,78 @@
         </div>
         <!-- ./col -->
       </div>
-          
+
+      <div class="box box-default">
+        <form #timelineForm="ngForm" (ngSubmit)="addTimeline(timelineForm)" class="form">
+          <div class="box-header with-border">
+            <h5>Timeline Kegiatan</h5>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>
+          </div>
+        <!-- /.box-header -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="judulBerita">Judul Kegiatan</label>
+                  <input type="text" class="form-control" id="judulBerita" placeholder="Masukkan judul kegiatan" name="title" ngModel required>
+                </div>
+                <div class="form-group">
+                  <label for="ringkasanBerita">Deskripsi Kegiatan</label>
+                  <input type="text" class="form-control" id="ringkasanBerita" placeholder="Masukkan deskripsi kegiatan" name="summary" ngModel required>
+                </div>
+                <div class="form-group">
+                  <label>Tanggal Kegiatan</label>
+  
+                  <div class="input-group">
+                    <input type="date" class="form-control pull-right" name="date" ngModel required>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <button type="submit" class="btn btn-success pull-right">Tambahkan</button>
+              </div>
+
+              <div class="col-md-7">
+                <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Nama Kegiatan</th>
+                        <th>Deskripsi</th>
+                        <th>Tanggal</th>                        
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <div style="text-align: center" *ngIf="eventList?.length == 0">
+                        <p>Tidak ada kegiatan yang dapat ditampilkan saat ini.</p>
+                      </div>
+                      <tr *ngFor="let event of eventList; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{event.title}}</td>
+                        <td>{{event.body}}</td>  
+                        <td>{{event.date | date: 'dd-MM-yyyy'}}</td>                                                                      
+                        <td>
+                          <a class="btn btn-danger" style="cursor: pointer;" (click)="deleteTimeline(event._id)">
+                            <i class="fa fa-trash"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+  
+            </div>     
+            <!-- /.row -->
+          </div>
+        <!-- /.box-body -->
+        </form>
+    
+      </div>
+      
 
   </section>
-  <!-- /.content -->
