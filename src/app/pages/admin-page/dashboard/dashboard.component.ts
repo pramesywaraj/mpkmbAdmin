@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { TimelineService } from '../../../services/timeline.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.eventList = data.timelines;
       }
     });
+
   }
 
   ngOnDestroy() {
@@ -40,9 +42,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.timeline.postTimeline(dataObj).subscribe(data => {
         if(data.status == 201) {
           alert('Kegiatan berhasil ditambahkan.');
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-            this.router.navigate(["admin/dashboard"])
-          ); 
+          this.ngOnInit();
         } else {
           alert(data.message);
         }
@@ -57,9 +57,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.timeline.deleteTimeline(id).subscribe(data => {
         if(data.status == 200) {
           alert('Kegiatan berhasil dihapus dari Jadwal Kegiatan.');
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-            this.router.navigate(["admin/dashboard"])
-          ); 
+          // this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+          //   this.router.navigate(["admin/dashboard"])
+          // ); 
+          this.ngOnInit();
         }
       });
     } else {
