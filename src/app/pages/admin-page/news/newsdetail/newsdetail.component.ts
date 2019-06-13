@@ -24,12 +24,12 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
   newsImageUrl: string;
 
   compressedBodyImage: any;
-  compressedOtherImage: any;
+  compressedOtherImage: any[] = [];
   description: string = '';
 
   coverImageSrc: string;
 
-  promises: Promise<Blob>[] = [];
+  promises: Promise<any>[] = [];
 
   
 
@@ -79,7 +79,7 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
       let temp = Promise.resolve(this.promises)
         .then(file => {
           console.log('tes', file);
-          // this.compressedBodyImage = file;
+          this.compressedBodyImage = file;
         }
       );
     }      
@@ -90,6 +90,7 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
     if(event.target.files.length > 0) {
 
       let file = event.target.files;
+      console.log(file);
 
       for(let i = 0; i < file.length; i++) {
         this.promises.push(compressor.compress(file[i], {quality: .5}));
@@ -97,9 +98,7 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
         
       let temp = Promise.all(this.promises)
         .then(file => {
-          console.log('check', file);
-          // this.compressedOtherImage = file;
-          // console.log('other', this.compressedOtherImage);
+          this.compressedOtherImage = file;
         }
       );
     }      
@@ -113,9 +112,7 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
       this.news.addNewsBodyImage(formData, this.newsDetail._id).subscribe(
         data => {
           alert('Gambar berhasil ditambahkan');
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-            this.router.navigate(["admin/berita-detail/", this.newsDetail._id])
-          ); 
+          this.ngOnInit();
         },
         err => {
           console.log('err', err);
@@ -129,18 +126,19 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
   
   addOtherImage() {
     if(this.compressedOtherImage != null) {
+      console.log(this.newsDetail._id);
 
       const formData = new FormData();
+      for(let i = 0; i < this.compressedOtherImage.length; i++) {
+        formData.append('otherImages', this.compressedOtherImage[i], this.compressedOtherImage[i].name);
+      }
       formData.append('description', this.description);
-      formData.append('otherImages', this.compressedOtherImage);
     
       this.news.addNewsOtherImage(formData, this.newsDetail._id).subscribe(
         data => {
           console.log('data', data);
           alert('Gambar berhasil ditambahkan');
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-            this.router.navigate(["admin/berita-detail/", this.newsDetail._id])
-          );
+          this.ngOnInit();
           
         },
         err => {

@@ -112,9 +112,10 @@ export class NewsService {
     let header = new HttpHeaders();
     header = header.append('Authorization', 'Bearer ' + this.userToken);
 
-    console.log("res", file);
-    console.log("res", newsId);    
-
+    console.log("res1", this.config.baseUrl + 'news/upload/otherImages/' + newsId);
+    console.log("res2", file.get('otherImages'));
+    
+    
     return this.http.post<any>(
       this.config.baseUrl + 'news/upload/otherImages/' + newsId, file, {headers: header}
     ).pipe(

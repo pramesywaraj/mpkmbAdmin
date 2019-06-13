@@ -102,28 +102,32 @@ export class AddnewsComponent implements OnInit {
   addBerita(form) {
     let temp = form.value;
     // console.log(this.uploadData);
-
-    const formData = new FormData();
-    formData.append('title', temp.title);
-    formData.append('summary', temp.summary);
-    formData.append('body1', temp.body1);
-    formData.append('body2', temp.body2);
-    formData.append('body3', temp.body3);    
-    formData.append('snippet', temp.snippet);
-    formData.append('coverImages', this.compressedImage);
-  
-    this.news.addNews(formData).subscribe(
-      data => {
-        alert('Berita berhasil ditambahkan');
-        this.router.navigate(['admin/berita']);
-      },
-      err => {
-        console.log('err', err);
-      }
-    );
-
-    console.log('tetot');
+    if(
+      !temp.title || !temp.summary || 
+      !temp.body1 || !temp.body2 || 
+      !temp.body3 || !temp.snippet || !this.compressedImage
+    ) {
+      alert('Ada kolom yang belum diisi, silahkan isi terlebih dahulu.');
+    } else {
+      const formData = new FormData();
+      formData.append('title', temp.title);
+      formData.append('summary', temp.summary);
+      formData.append('body1', temp.body1);
+      formData.append('body2', temp.body2);
+      formData.append('body3', temp.body3);    
+      formData.append('snippet', temp.snippet);
+      formData.append('coverImages', this.compressedImage);
     
+      this.news.addNews(formData).subscribe(
+        data => {
+          alert('Berita berhasil ditambahkan');
+          this.router.navigate(['admin/berita']);
+        },
+        err => {
+          console.log('err', err);
+        }
+      );  
+    }  
   }
 
 }
