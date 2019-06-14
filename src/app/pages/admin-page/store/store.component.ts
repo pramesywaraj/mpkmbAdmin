@@ -92,9 +92,7 @@ export class StoreComponent implements OnInit, OnDestroy {
         console.log(data);
         if(data.status == 200) {
           alert('Barang berhasil dihapus.');
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-            this.router.navigate(["admin/toko"])
-          ); 
+          this.ngOnInit();
         }
       });
     }

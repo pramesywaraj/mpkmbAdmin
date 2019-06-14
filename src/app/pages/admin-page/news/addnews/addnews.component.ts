@@ -24,16 +24,7 @@ export class AddnewsComponent implements OnInit {
   constructor(public auth: AuthService, public news: NewsService, public formBuilder: FormBuilder, public router: Router) { }
 
   ngOnInit() {
-    // init the news form
 
-    // this.bodyImage = this.formBuilder.group({
-    //   bodyImage: ['']
-    // });
-
-    // this.otherImage = this.formBuilder.group({
-    //   otherImage: [''],
-    //   description: ''
-    // });
   }
 
   // fungsi untuk mengganti preview gambar utama dan gambar body
@@ -54,24 +45,7 @@ export class AddnewsComponent implements OnInit {
       );
     }      
   }
-  // detectImages(event) {
-  //   console.log(event.target.files);
-  //   if(event.target.files.length > 0) {
-  //     let file = event.target.files;
-
-  //     for(let i = 0; i < file.length; i++) {
-  //       this.promises.push(compressor.compress(file, {quality: .5}));
-  //     }      
-
-  //     let temp = Promise.all(this.promises)
-  //       .then(file => {
-  //         this.setOtherImage(file);
-  //       }
-  //     );
-  //   }   
-  // }
   
-
   changeInputLabel (file) {
     const reader = new FileReader();
     reader.onload = e => this.coverImageSrc = reader.result as string;
@@ -83,21 +57,6 @@ export class AddnewsComponent implements OnInit {
     
   }
 
-  // changeInputLabelOtherImage (file: any[]) {
-  //   const reader = new FileReader();
-  //   reader.onload = e => this.bodyImageLabel = reader.result as string;
-  //   this.fileInput = file[0].name;
-  //   reader.readAsDataURL(file[0]);    
-  // }
-
-  // setBodyImage(file) {
-  //   this.bodyImage.get('bodyImage').setValue(file);
-  //   this.changeInputLabelImage(file);
-  // }
-
-  // setOtherImage(file: any[]) {
-  //   this.otherImage.get('otherImage').setValue(file);
-  // }
 
   addBerita(form) {
     let temp = form.value;

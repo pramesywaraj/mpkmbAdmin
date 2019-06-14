@@ -52,6 +52,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  editTimeline(id) {
+    let obj = {
+      'title': prompt('Masukkan judul kegiatan'),
+      'body': prompt('Deskripsi kegiatan'),
+      'date': prompt('Tanggal kegiatan (format TTTT-BB-HH)')
+    };
+
+    console.log("obj", obj);
+    console.log('id', id);
+
+    if(obj.title == '' || obj.body == '' || obj.date == '') {
+      alert('Gagal mengganti timeline, ada yang belum terisi');
+    } else {
+      if(moment(obj.date, 'YYYY-MM-DD', true).isValid()) {
+        this.timeline.editTimeline(obj, id).subscribe(
+          data => {
+            if(data.status == 201) {
+              alert('Timeline berhasil dirubah.');
+              this.ngOnInit();
+            }
+          }
+        );
+      } else {
+        alert('Tanggal yang Anda masukkan tidak sesuai dengan format yang telah ditentukan. Silahkan cek deskripsi ketika memasukkannya.');
+      }
+      
+    }
+  }
+
   deleteTimeline(id) {
     if(id != null) {
       this.timeline.deleteTimeline(id).subscribe(data => {

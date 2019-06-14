@@ -54,6 +54,27 @@ export class TimelineService {
       );
   }
 
+  public editTimeline(form, id) {
+    let header = new HttpHeaders();
+    header = header.append('Content-type', 'application/json');
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+
+    return this.http.post<any>(
+      this.config.baseUrl + 'timeline/edit/' + id, JSON.stringify(form), {headers: header})
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the timeline service and postTimeline function...', err);
+          return throwError(err);
+        })
+      );
+  }
+
   public deleteTimeline(id) {
     return this.http.delete<any>(
       this.config.baseUrl + 'timeline/delete/' + id)
