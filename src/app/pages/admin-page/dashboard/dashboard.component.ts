@@ -10,7 +10,7 @@ import { getLocaleDateFormat } from '@angular/common';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   currentDate: any;
   eventList: any[];
 
@@ -27,9 +27,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 
   addTimeline(form) {
     let dataObj = {

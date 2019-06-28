@@ -70,7 +70,9 @@ export class GroupTaskComponent implements OnInit {
       console.log('EX', data);
       if(data.status == 201) {
         alert('Tugas berhasil dibuat.');
-        this.ngOnInit();
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+          this.router.navigate(["admin/penugasan"])
+        ); 
       }
     });
   }
@@ -80,7 +82,9 @@ export class GroupTaskComponent implements OnInit {
       this.task.deleteTask(id).subscribe(data => {
         if(data.status == 200) {
           alert('Tugas berhasil dihapus.');
-          this.ngOnInit();
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+            this.router.navigate(["admin/penugasan"])
+          );
         }
       });
     }

@@ -105,5 +105,22 @@ export class StoreService {
         })
       );
   }
+
+  public orderListDownload(): Observable<any> {
+    var body = { filename: 'listpembelian.xlsx' };
+    return this.http.get(
+      this.config.baseUrl + 'order/download', {responseType: 'blob'})
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the store service and orderListDownload function...', err);
+          return throwError(err);
+        })
+      );
+  }
   
 }

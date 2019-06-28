@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
+// import 'rxjs/Rx' ;
 import { Subscription } from 'rxjs';
+import * as FileSaver from 'file-saver';
 
 import { StoreService } from '../../../services/store.service';
 
@@ -99,5 +101,16 @@ export class StoreComponent implements OnInit, OnDestroy {
     
   }
 
+  public orderListDownload() {
+    this.store.orderListDownload().subscribe(data => 
+      {
+        console.log(data);
+        FileSaver.saveAs(data, 'daftar_pembeli.xlsx');
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
+  }
 
 }

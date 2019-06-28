@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   constructor(public task: TaskService, public router: Router) { }
 
   ngOnInit() {
-    this. subscription = this.task.getCategory().subscribe(data => {
+    this.subscription = this.task.getCategory().subscribe(data => {
       if(data.status == 200) {
         this.categories = data.categories;
         console.log(this.categories);
