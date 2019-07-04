@@ -24,9 +24,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   goods = [];
   orderList = [];
 
-  constructor(private store: StoreService, private router: Router) { }
-
-  ngOnInit() {
+  constructor(private store: StoreService, private router: Router) {
     this.subscription = this.store.getGoods().subscribe(data => {
       if(data.status == 200) {
         this.goods = data.stores.docs;
@@ -36,6 +34,8 @@ export class StoreComponent implements OnInit, OnDestroy {
 
     this.getOrderList();
   }
+
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

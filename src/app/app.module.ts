@@ -45,7 +45,7 @@ import { GroupTaskComponent } from './pages/admin-page/task/group-task/group-tas
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   providers: [
     ConfigService,
