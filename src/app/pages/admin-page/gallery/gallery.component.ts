@@ -40,6 +40,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.subscription = await this.gallery.getVideosList().subscribe(data => {
       if(data.status == 200) {
         this.videosList = data.videoGaleries;
+        for(let i = 0; i < this.videosList.length; i++) {
+          this.videosList[i].url = 'https://www.youtube.com/embed/' + this.videosList[i].url;
+          console.log(this.videosList[i]);
+        }
       }
     });
   }

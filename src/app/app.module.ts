@@ -22,6 +22,7 @@ import { StoreComponent } from './pages/admin-page/store/store.component';
 import { AddnewsComponent } from './pages/admin-page/news/addnews/addnews.component';
 import { NewsdetailComponent } from './pages/admin-page/news/newsdetail/newsdetail.component';
 import { GroupTaskComponent } from './pages/admin-page/task/group-task/group-task.component';
+import { SafePipe } from './pipes/sanitizer.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { GroupTaskComponent } from './pages/admin-page/task/group-task/group-tas
     AddnewsComponent,
     NewsdetailComponent,
     GroupTaskComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
