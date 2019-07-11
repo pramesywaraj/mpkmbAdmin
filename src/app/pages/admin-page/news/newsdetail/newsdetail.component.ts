@@ -151,6 +151,10 @@ export class NewsdetailComponent implements OnInit, OnDestroy {
     
   }
 
+  // editNews() {
+  
+  // }
+
   // loadDetail(id) {
   //   // this.news.getNewsDetail(id).subscribe(
   //   //   data => {

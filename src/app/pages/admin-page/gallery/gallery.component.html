@@ -228,7 +228,7 @@
                           <label for="categoryOption" class="col-sm-3 control-label">Kategori</label>
                           <div class="col-sm-9">
                             <select id="categoryOption" class="form-control" name="categoryId" ngModel required>
-                              <option *ngFor="let category of categoriesList" value="category._id">{{category.name}}</option>
+                              <option *ngFor="let category of categoriesList" value="{{category._id}}">{{category.name}}</option>
                               <option *ngIf="!categoriesList">Anda belum menambahkan Kategori.</option>                        
                             </select>
                           </div>

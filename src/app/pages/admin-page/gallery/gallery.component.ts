@@ -60,6 +60,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.subscription = await this.gallery.getCategories().subscribe(data => {
       if(data.status == 200) {
         this.categoriesList = data.categories;
+        console.log("check", this.categoriesList);
       }
     });
   }
@@ -169,7 +170,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   addPhoto(photo) {
-    if(photo) {
+    if(photo.value) {
       let temp = photo.value;
       let objArray = {
         'categoryId' : temp.categoryId,

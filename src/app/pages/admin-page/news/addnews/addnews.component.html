@@ -26,91 +26,59 @@
       </div>
     <!-- /.box-header -->
       <div class="box-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="judulBerita">Judul Berita</label>
-                <input type="text" class="form-control" id="judulBerita" placeholder="Masukkan isi berita" name="title" ngModel required>
-              </div>
-              <div class="form-group">
-                <label for="ringkasanBerita">Highlight Berita</label>
-                <input type="text" class="form-control" id="ringkasanBerita" placeholder="Masukkan ringkasan berita" name="summary" ngModel required>
-              </div>
-              <div class="form-group">
-                <label for="ringkasanBerita">Caption Berita</label>
-                <input type="text" class="form-control" id="captionBerita" placeholder="Masukkan caption berita" name="snippet" ngModel required>
-              </div>
-              <div class="form-group">
-                <label>Isi Berita 1</label>
-                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body1" ngModel required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Isi Berita 2</label>
-                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body2" ngModel required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Isi Berita 3</label>
-                <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body3" ngModel required></textarea>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="judulBerita">Judul Berita</label>
+              <input type="text" class="form-control" id="judulBerita" placeholder="Masukkan isi berita" name="title" ngModel required>
+            </div>
+            <div class="form-group">
+              <label for="ringkasanBerita">Highlight Berita</label>
+              <input type="text" class="form-control" id="ringkasanBerita" placeholder="Masukkan ringkasan berita" name="summary" ngModel required>
+            </div>
+            <div class="form-group">
+              <label for="ringkasanBerita">Caption Berita</label>
+              <input type="text" class="form-control" id="captionBerita" placeholder="Masukkan caption berita" name="snippet" ngModel required>
+            </div>
+            <div class="form-group">
+              <label>Isi Berita 1</label>
+              <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body1" ngModel required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Isi Berita 2</label>
+              <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body2" ngModel required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Isi Berita 3</label>
+              <textarea class="form-control" rows="5" placeholder="Tambahkan isi berita" name="body3" ngModel required></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Gambar Utama Berita</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file" 
+                  (change)="detectImage($event)" 
+                  name="coverImages" 
+                  accept="image/jpg, image/jpeg" 
+                  ngModel required
+                >
+                <label class="custom-file-label" for="file">{{coverImageLabel}}</label>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Gambar Utama Berita</label>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="file" 
-                    (change)="detectImage($event)" 
-                    name="coverImages" 
-                    accept="image/jpg, image/jpeg" 
-                    ngModel required
-                  >
-                  <label class="custom-file-label" for="file">{{coverImageLabel}}</label>
-                </div>
-              </div>
-              <div class="image-preview">
-                <img 
-                  [src]="coverImageSrc || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
-                  alt="your image"
-                />
-              </div>
-<!-- 
-              <div class="form-group">
-                <label>Gambar di Tubuh Berita</label>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="file" 
-                    (change)="detectImage($event, 'body')" 
-                    name="bodyImages" 
-                    accept="image/jpg, image/jpeg" 
-                    ngModel required
-                  >
-                  <label class="custom-file-label" for="file">{{bodyImageLabel}}</label>
-                </div>
-              </div> -->
-              <!-- <div class="image-preview">
-                <img 
-                  [src]="bodyImage || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
-                  alt="your image"
-                />
-              </div> -->
-              
-              <!-- <div class="form-group">
-                <label>Gambar di Lainnya</label>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="file" 
-                    (change)="detectImages($event)" 
-                    name="otherImage" 
-                    accept="image/jpg, image/jpeg" 
-                    ngModel required
-                  >
-                  <label class="custom-file-label" for="file">{{bodyImageLabel}}</label>
-                </div>
-              </div> -->
-
+            <div class="image-preview">
+              <img 
+                [src]="coverImageSrc || 'https://www.heavydutydirect.ca/wp-content/uploads/2019/02/camera-placeholder-400x250.jpg'" 
+                alt="your image"
+              />
             </div>
 
-          </div>     
-        <!-- /.row -->
-      </div>
-    <!-- /.box-body -->
+          </div>
+
+        </div>
+
+      </div>     
+      <!-- /.row -->
       <div class="box-footer">
         <button type="submit" class="btn btn-success pull-right">Tambahkan</button>
       </div>
