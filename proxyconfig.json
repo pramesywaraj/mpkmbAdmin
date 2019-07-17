@@ -1,0 +1,7 @@
+{
+    "/*": {
+        "target" : "http://api.mpkmb.ipb.ac.id",
+        "secure" : false,
+        "changeOrigin" : true
+    }
+}
