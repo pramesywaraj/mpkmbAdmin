@@ -32,7 +32,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private addCategoryAction() {
+  public addCategoryAction() {
     console.log(this.nameInput);
     if(this.nameInput.name) {
       this.task.addCategory(this.nameInput).subscribe(data => {

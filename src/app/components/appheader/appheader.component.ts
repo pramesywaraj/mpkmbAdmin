@@ -15,7 +15,7 @@ export class AppheaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  private logout() {
+  public logout() {
     this.auth.logout();
     alert('Anda berhasil keluar.');
     this.router.navigate(['/login']);

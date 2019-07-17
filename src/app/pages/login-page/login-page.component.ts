@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   //   password: ''
   // }
 
-  private LoginUser: FormGroup;
+  public LoginUser: FormGroup;
 
   constructor(public router: Router, public auth: AuthService, private formBuilder: FormBuilder) {
     this.LoginUser = this.formBuilder.group(
